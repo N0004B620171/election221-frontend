@@ -1,0 +1,22 @@
+body{
+    background: aliceblue;
+}
+
+legend{
+        
+        text-align: center;
+    
+}
+
+
+.well{
+    background: rgba(10, 5, 3, 0.137);
+    border: none;
+    border-radius: 15px/15px;
+    box-shadow: 0px 0px 50px 0px rgb(75, 141, 199);
+}
+img{
+    margin-left: 700px;
+    width: 50px;
+    height: 50px;
+}
