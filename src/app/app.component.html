@@ -8,7 +8,11 @@
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Galsen Election 221</font></font></a>
+        <a class="navbar-brand" routerLink="/home">
+          <font style="vertical-align: inherit;" >
+            <font style="vertical-align: inherit;">Galsen Election 221</font>
+          </font>
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Basculer la navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -56,6 +60,13 @@
                 <a class="dropdown-item" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Lien séparé</font></font></a>
               </div>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/connexion">
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">connexion </font>
+                </font>
+              </a>
+            </li>
           </ul>
           
         </div>
@@ -64,35 +75,7 @@
 
     <router-outlet></router-outlet>
 
-    <div class="container">
-      <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img src="../assets/image/election1.png" class="d-block w-100" height="519px" alt="...">
-          </div>
-          <div class="carousel-item">
-            <img src="../assets/image/election2.jpg" class="d-block w-100" height="519px" alt="...">
-            <div class="carousel-caption d-none d-md-block">
-              <h5 >Un devoir est une obligation. <br> Un devoir civique s'impose à tous les citoyens. Et Voter en ait un .  </h5>
-              <p></p>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <img src="../assets/image/election3.jpg" class="d-block w-100" height="519px" alt="...">
-            <div class="carousel-caption d-none d-md-block">
-              <h5 >Tandal Sa candidat bi ga wolou thie karangué té boul ame dara loye tite.</h5>
-              <p></p>
-            </div>
-          </div>
-        </div>
-      </div>
     
-      
-    </div>
-    <footer class="py-2 bg-dark fixed-bottom">
-      <div class="container">
-      <p class="m-0 text-center text-white">Copyright@ Makhou Plus</p>
-      </div>
-    </footer>
+  
   </body>
 </html>
