@@ -60,15 +60,18 @@
                 <a class="dropdown-item" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Lien séparé</font></font></a>
               </div>
             </li>
-            <div class="">
-              <li class="nav-item ">
-                <a class="nav-link" routerLink="/connexion">
-                  <font style="vertical-align: inherit;">
-                    <font style="vertical-align: inherit;">connexion </font>
-                  </font>
-                </a>
-              </li>
-            </div>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle " data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                connexion
+              </a>
+              <div class="dropdown-menu " style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(0px, 42px, 0px);" data-popper-placement="bottom-start">
+               
+                <a class="dropdown-item" routerLink="/administrateur"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Administrateur</font></font></a>
+                <a class="dropdown-item" routerLink="/connexion"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Electeur</font></font></a>
+                
+              </div>
+            </li>
+            
           </ul>
           
         </div>
