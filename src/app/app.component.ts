@@ -1,5 +1,13 @@
 import { Component } from '@angular/core';
+import senegalData from './regiondata.json';
 
+
+
+
+interface Senegal {
+  
+}
+interface Region{}
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -7,4 +15,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Election221';
+  senegal: Senegal[] = senegalData;
+  constructor() {
+    console.log(this.senegal[0])
+  }
 }
