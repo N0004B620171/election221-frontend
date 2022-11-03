@@ -11,6 +11,7 @@ import { InscriptionPasswordComponent } from './inscription-password/inscription
 import { PageElecteurComponent } from './page-electeur/page-electeur.component';
 import { AdministrateurComponent } from './administrateur/administrateur.component';
 import { ConnexionAdministrateurComponent } from './connexion-administrateur/connexion-administrateur.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { ConnexionAdministrateurComponent } from './connexion-administrateur/con
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule
   ],
   providers: [],
