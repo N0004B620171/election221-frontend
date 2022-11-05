@@ -15,7 +15,7 @@ import { CandidatNewComponent } from './candidat/candidat-new/candidat-new.compo
 const routes: Routes = [
   { path: 'electeur-new', component: ElecteurNewComponent },
   { path: 'electeur-vote', component: ElecteurVoteComponent },
-  { path: 'candidat-new', component: CandidatNewComponent },
+  { path: 'candidat-new', component: CandidatNewComponent, },
 
   { path: 'home', component: HomeComponent },
   { path: 'connexion', component: ConnexionComponent },

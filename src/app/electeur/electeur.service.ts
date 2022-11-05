@@ -17,14 +17,19 @@ export class ElecteurService {
     return this.httpClient.get<Electeur[]>(
       'http://127.0.0.1:8000/electeur/',
       {
-       // headers: this.userService.autorisation(),
+        // headers: this.userService.autorisation(),
       }
     );
   }
 
   findOneById(id: number) {
     return this.httpClient.get('http://127.0.0.1:8000/electeur/' + id, {
-     // headers: this.userService.autorisation(),
+      // headers: this.userService.autorisation(),
+    });
+  }
+  findOneByCni(cni: string) {
+    return this.httpClient.get('http://127.0.0.1:8000/electeur/chercherByCni/' + cni, {
+      // headers: this.userService.autorisation(),
     });
   }
 
@@ -44,14 +49,14 @@ export class ElecteurService {
       'http://127.0.0.1:8000/api/Electeur/' + electeur.id,
       Electeur,
       {
-       // headers: this.userService.autorisation(),
+        // headers: this.userService.autorisation(),
       }
     );
   }
 
   remove(id: number) {
     return this.httpClient.delete('http://127.0.0.1:8000/api/Electeur/' + id, {
-     // headers: this.userService.autorisation(),
+      // headers: this.userService.autorisation(),
     });
   }
 }

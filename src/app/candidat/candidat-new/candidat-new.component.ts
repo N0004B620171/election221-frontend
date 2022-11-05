@@ -9,8 +9,9 @@ import { Circonscription } from 'src/app/model/circonscription';
   styleUrls: ['./candidat-new.component.css']
 })
 export class CandidatNewComponent implements OnInit {
-
-  electeur = new Electeur();
+  myCni: string;
+  electeur1: any;
+  electeur = new Electeur()
   circonscription = new Circonscription();
   err: number;
 
@@ -742,6 +743,18 @@ export class CandidatNewComponent implements OnInit {
       }
     );
   }
+  chercheByCni() {
+    this.electeurService.findOneByCni(this.myCni).subscribe(
+      (data) => {
+        console.log(data);
+        this.electeur1 = data
+      },
+      (err) => {
+        this.err = 1;
+      }
+    );
+    
 
+  }
 }
 

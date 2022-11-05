@@ -1,6 +1,7 @@
 
 
 export class Candidat {
+  id:number;
     prenom: string;
     nom: string;
     dateNaiss: any;

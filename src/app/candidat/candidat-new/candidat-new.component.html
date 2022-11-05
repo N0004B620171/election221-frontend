@@ -1,8 +1,20 @@
 <div class="container mt-5">
+    <form #form="ngForm" (ngSubmit)="chercheByCni()" ngNativeValidate>
+        <div class="form-group">
+            <label for="montant">Saisir votre cni
+            <input #chercheCni="ngModel" [ngClass]="{'is-invalid': chercheCni.touched && chercheCni.
+                                            invalid,'is-valid':chercheCni.touched && chercheCni.valid}"
+                [required]="true" [(ngModel)]="myCni" type="text" name="myCni" class="form-control" id="myCni"
+                placeholder="Votre Cni"></label>
+        </div>
+        <button [disabled]="form.invalid" class="btn btn-success">Success</button>
+
+    </form>
+
     <form #form="ngForm" (ngSubmit)="new()" ngNativeValidate>
         <div class="card" style="padding: 2%;">
             <div class="card-header bg-primary text-center">
-                <legend style="color: aliceblue;"> Formulaire d'inscription sur la liste electorale</legend>
+                <legend style="color: aliceblue;"> Formulaire d'inscription sur la liste des candidats</legend>
             </div>
             <div class="card-body">
 
