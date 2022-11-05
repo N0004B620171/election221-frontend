@@ -7,10 +7,16 @@ import { ConnexionComponent } from './connexion/connexion.component';
 import { InscriptionPasswordComponent } from './inscription-password/inscription-password.component';
 import { ConnexionAdministrateurComponent } from './connexion-administrateur/connexion-administrateur.component';
 import { AdministrateurComponent } from './administrateur/administrateur.component';
+import { ElecteurNewComponent } from './electeur/electeur-new/electeur-new.component';
+import { ElecteurVoteComponent } from './electeur/electeur-vote/electeur-vote.component';
+import { CandidatNewComponent } from './candidat/candidat-new/candidat-new.component';
 
 
 const routes: Routes = [
-  { path: 'inscription-electeur', component: InscriptionElectionComponent },
+  { path: 'electeur-new', component: ElecteurNewComponent },
+  { path: 'electeur-vote', component: ElecteurVoteComponent },
+  { path: 'candidat-new', component: CandidatNewComponent },
+
   { path: 'home', component: HomeComponent },
   { path: 'connexion', component: ConnexionComponent },
   { path: 'inscription-password', component: InscriptionPasswordComponent },

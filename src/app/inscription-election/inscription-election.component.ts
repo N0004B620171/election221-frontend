@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Electeur } from '../electeur/electeur';
 
 @Component({
   selector: 'app-inscription-election',

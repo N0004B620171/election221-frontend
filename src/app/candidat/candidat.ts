@@ -1,6 +1,6 @@
 
 
-export interface Candidat {
+export class Candidat {
     prenom: string;
     nom: string;
     dateNaiss: any;
