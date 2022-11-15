@@ -1,7 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Electeur } from 'src/app/electeur/electeur';
+import { Router } from '@angular/router';
+import { Electeur, User } from 'src/app/electeur/electeur';
 import { ElecteurService } from 'src/app/electeur/electeur.service';
+import { UserService } from 'src/app/electeur/user.service';
 import { Circonscription } from 'src/app/model/circonscription';
+import jwt_decode from "jwt-decode";
+import { LocalService } from 'src/app/local.service';
+import { Candidat } from '../candidat';
+import { CandidatService } from '../candidat.service';
 
 @Component({
   selector: 'app-candidat-new',
@@ -9,12 +15,16 @@ import { Circonscription } from 'src/app/model/circonscription';
   styleUrls: ['./candidat-new.component.css']
 })
 export class CandidatNewComponent implements OnInit {
-  myCni: string;
-  electeur1: any;
-  electeur = new Electeur()
+  email: string
+  password: string
+  electeur = new Candidat();
   circonscription = new Circonscription();
   err: number;
-
+  nps: string[] = ["Pastef",
+    "PDS",
+    "PS",
+    "Rewmi",
+    "BBY"]
   regions: string[] = [
     "Dakar",
     "Thies",
@@ -714,47 +724,88 @@ export class CandidatNewComponent implements OnInit {
     "Oukout",
     "Mlomp"
   ];
-  constructor(private electeurService: ElecteurService,
+  constructor(private candidatService: CandidatService,
+    private userService: UserService, private router: Router, private localStore: LocalService
   ) { }
-
+  token: string
+  decoded: string
+  text: any
   ngOnInit(): void {
 
+
+    // Retrieving data:
+    this.text = this.localStore.getData("currentU")
+    let obj = JSON.parse(this.text);
+
+    this.electeur.prenom = obj.prenom
+    this.electeur.nom = obj.nom
+    this.electeur.cni = obj.cni
+    this.electeur.dateNaiss = obj.dateNaiss
+    this.electeur.adresse = obj.adresse
+
+    this.circonscription.region = obj.circonscription.region
+    this.circonscription.departement = obj.circonscription.departement
+    this.circonscription.commune = obj.circonscription.commune
   }
+
+estCandidat:string
   new() {
+    this.isLoading()
 
-    this.electeurService.createCirconsctiption(this.circonscription).subscribe(
-      (data) => {
-        console.log(data);
-        this.electeur.circonscription = data;
 
-      },
-      (err) => {
-        this.err = 1;
-      }
-    );
     // this.electeur.circonscription = this.circonscription;
-
-    this.electeurService.create(this.electeur).subscribe(
+  //  console.log(this.electeur)
+    this.candidatService.create(this.electeur).subscribe(
       (data) => {
-        console.log(data);
+        if (data =="Vous etes deja candidat") {
+          this.estCandidat = "Vous etes deja candidat"
+        }
+        else if (data == "Vous ne pouvez pas etre candidat car vous n'etes pas electeur"){
+          console.log(data);
+          this.estCandidat = "Vous ne pouvez pas etre candidat car vous n etes pas electeur"
+
+        }
+        else{
+          console.log(data);
+          this.router.navigate(['/home']).then(() => {
+            //window.location.reload();
+          });
+        }
+        this.tourne = false
       },
       (err) => {
         this.err = 1;
       }
     );
   }
-  chercheByCni() {
-    this.electeurService.findOneByCni(this.myCni).subscribe(
+
+  tourne = false
+  tourne2 = false
+  isLoading() {
+    return this.tourne = true
+  }
+  isLoading2() {
+    return this.tourne2 = true
+  }
+  user = new User()
+  userLoged = new User()
+  currentUser: any
+
+  connecter() {
+    this.isLoading2()
+    this.userService.login(this.user).subscribe(
       (data) => {
         console.log(data);
-        this.electeur1 = data
+        let jwToken = data.body.token;
+        this.userLoged = jwt_decode(jwToken)
+
+        console.log(this.userLoged.username)
+
+
       },
       (err) => {
         this.err = 1;
       }
     );
-    
-
   }
 }
-

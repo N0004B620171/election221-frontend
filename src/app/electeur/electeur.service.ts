@@ -27,8 +27,8 @@ export class ElecteurService {
       // headers: this.userService.autorisation(),
     });
   }
-  findOneByCni(cni: string) {
-    return this.httpClient.get('http://127.0.0.1:8000/electeur/chercherByCni/' + cni, {
+  findOneByEmail(email: string) {
+    return this.httpClient.get('http://127.0.0.1:8000/electeur/chercherByEmail/' + email, {
       // headers: this.userService.autorisation(),
     });
   }

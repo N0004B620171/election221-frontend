@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { MatButton } from '@angular/material/button';
 import { Circonscription } from 'src/app/model/circonscription';
-import { Electeur } from '../electeur';
+import { Electeur, User } from '../electeur';
 import { ElecteurService } from '../electeur.service';
-
+import { UserService } from '../user.service';
+import jwt_decode from "jwt-decode";
+import { Router } from '@angular/router';
+import { LocalService } from 'src/app/local.service';
 
 
 @Component({
@@ -12,7 +16,8 @@ import { ElecteurService } from '../electeur.service';
 })
 
 export class ElecteurNewComponent implements OnInit {
-
+  email: string
+  password: string
   electeur = new Electeur();
   circonscription = new Circonscription();
   err: number;
@@ -717,28 +722,87 @@ export class ElecteurNewComponent implements OnInit {
     "Mlomp"
   ];
   constructor(private electeurService: ElecteurService,
+    private userService: UserService, private router: Router, private localStore: LocalService
   ) { }
+  token: string
+  decoded: string
 
   ngOnInit(): void {
+    console.log(this.decoded);
+
 
   }
+
+
   new() {
+    this.isLoading()
 
-    this.electeurService.createCirconsctiption(this.circonscription).subscribe(
-      (data) => {
-        console.log(data);
-        this.electeur.circonscription = data;
+    this.electeur.region = this.circonscription.region;
+    this.electeur.departement = this.circonscription.departement;
+    this.electeur.commune = this.circonscription.commune;
 
-      },
-      (err) => {
-        this.err = 1;
-      }
-    );
     // this.electeur.circonscription = this.circonscription;
-
+    console.log(this.electeur)
     this.electeurService.create(this.electeur).subscribe(
       (data) => {
         console.log(data);
+        this.ok = true
+        this.tourne = false
+      },
+      (err) => {
+        this.err = 1;
+        this.tourne = false
+
+      }
+    );
+  }
+
+  tourne = false
+  tourne2 = false
+  isLoading() {
+    return this.tourne = true
+  }
+  isLoading2() {
+    return this.tourne2 = true
+  }
+  user = new User()
+  userLoged = new User()
+  currentUser: any
+  ok: any
+  ok2: any
+  connecter() {
+    this.isLoading2()
+    this.userService.login(this.user).subscribe(
+      (data) => {
+        console.log(data);
+        let jwToken = data.body.token;
+        this.userLoged = jwt_decode(jwToken)
+        console.log(this.userLoged.username)
+        this.electeurService.findOneByEmail(this.userLoged.username).subscribe(
+          (data) => {
+            console.log(data);
+            this.currentUser = data
+            const myJSON = JSON.stringify(data);
+
+            this.localStore.saveData("currentU", myJSON)
+            console.log(this.userLoged.roles[0])
+            this.tourne2 = false
+            this.ok2 = true
+            if (this.userLoged.roles[0] == "ROLE_ADMIN") {
+              this.router.navigate(['/admin-show']).then(() => {
+              });
+            }
+            else
+            this.router.navigate(['/home']).then(() => {
+             });
+
+          },
+          (err) => {
+            this.err = 1;
+
+          }
+        );
+
       },
       (err) => {
         this.err = 1;

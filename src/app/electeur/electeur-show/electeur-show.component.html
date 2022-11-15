@@ -1,1 +1,13 @@
-<p>electeur-show works!</p>
+<h1>Resultat election </h1>
+<div class="row">
+<div id="map" class="mb-3">
+
+</div>
+
+<div class="col-md mt-5" *ngFor="let candidat of candidats">
+    {{candidat.prenom}} {{candidat.nom}} du
+    parti {{candidat.nom_parti}} ont vote pour lui 0{{candidat.electeur?.id}} electeurs
+
+
+</div>
+</div>

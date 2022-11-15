@@ -40,6 +40,12 @@ export class CandidatService {
       //headers: this.userService.autorisation(),
     });
   }
+
+  voter(candidat: Candidat) {
+    return this.httpClient.patch('http://127.0.0.1:8000/electeur/voter', candidat, {
+      //headers: this.userService.autorisation(),
+    });
+  }
   createCirconsctiption(circonscription: Circonscription) {
     return this.httpClient.post('http://127.0.0.1:8000/circonscription/new', circonscription, {
       //headers: this.userService.autorisation(),

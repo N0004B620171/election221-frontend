@@ -1,0 +1,21 @@
+.spinner {
+    display: inline-block;
+    margin: 0 4px 0 -4px;
+}
+
+.example-form {
+    min-width: 900px;
+    max-width: 1000px;
+    width: 100%;
+}
+
+.example-form1 {
+    /* min-width: 400px; */
+    max-width: 600px;
+
+    width: 100%;
+}
+
+.example-full-width {
+    width: 100%;
+}

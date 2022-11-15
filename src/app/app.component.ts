@@ -16,7 +16,9 @@ interface Region{}
 export class AppComponent {
   title = 'Election221';
   senegal: Senegal[] = senegalData;
+  
   constructor() {
     console.log(this.senegal[0])
   }
+  
 }

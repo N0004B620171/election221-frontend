@@ -1,1047 +1,1355 @@
-<div class="container mt-5">
-    <form #form="ngForm" (ngSubmit)="new()" ngNativeValidate>
-        <div class="card" style="padding: 2%;">
-            <div class="card-header bg-primary text-center">
-                <legend style="color: aliceblue;"> Formulaire d'inscription sur la liste des electeurs</legend>
-            </div>
-            <div class="card-body">
-
-                <h4 class="card-title">Nouveau Electeur</h4>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md">
-                            <div class="form-group">
-                                <label for="montant">Prenom</label>
-                                <input #electeurPrenom="ngModel" [ngClass]="{'is-invalid': electeurPrenom.touched && electeurPrenom.
-                                    invalid,'is-valid':electeurPrenom.touched && electeurPrenom.valid}"
-                                    [required]="true" [(ngModel)]="electeur.prenom" type="text" name="prenom"
-                                    class="form-control" id="montant" placeholder="Entrer votre prenom">
+<mat-grid-list cols="3" rowHeight="500px">
+    <mat-grid-tile [colspan]="2">
+        <form #form="ngForm" (ngSubmit)="new()" ngNativeValidate class="example-form">
+            <mat-card>
+                <mat-card-title class="text-center">
+                    Formulaire d'inscription sur la liste des electeurs
+                </mat-card-title>
+                <mat-card-content>
+                    <mat-card-subtitle>Nouveau Electeur</mat-card-subtitle>
+                    <div class="alert alert-success" *ngIf="ok==true"> <strong>Inscription reussi veuillez vous connecter..</strong> </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <mat-form-field class="example-full-width" appearance="fill">
+                                    <mat-label>Prenom</mat-label>
+                                    <input matInput #electeurPrenom="ngModel" [ngClass]="{'is-invalid': electeurPrenom.touched && electeurPrenom.
+                                        invalid,'is-valid':electeurPrenom.touched && electeurPrenom.valid}"
+                                        [required]="true" [(ngModel)]="electeur.prenom" type="text" name="prenom"
+                                        id="montant" placeholder="Entrer votre prenom">
+                                </mat-form-field>
                             </div>
-                        </div>
-                        <div class="col-md">
-                            <div class="form-group">
-                                <label for="montant">Nom</label>
-                                <input #electeurNom="ngModel" [ngClass]="{'is-invalid': electeurNom.touched && electeurNom.
-                                    invalid,'is-valid':electeurNom.touched && electeurNom.valid}" [required]="true"
-                                    [(ngModel)]="electeur.nom" type="text" name="nom" class="form-control" id="montant"
-                                    placeholder="Entrer votre nom">
+                            <div class="col">
+                                <mat-form-field class="example-full-width" appearance="fill">
+                                    <mat-label>Nom</mat-label>
+                                    <input matInput #electeurNom="ngModel" [ngClass]="{'is-invalid': electeurNom.touched && electeurNom.
+                                        invalid,'is-valid':electeurNom.touched && electeurNom.valid}" [required]="true"
+                                        [(ngModel)]="electeur.nom" type="text" name="nom" id="montant"
+                                        placeholder="Entrer votre nom">
+                                </mat-form-field>
                             </div>
-                        </div>
-                        <div class="col-md">
-                            <div class="form-group">
-                                <label for="montant">Carte d'identite national</label>
-                                <input #electeurCni="ngModel" [ngClass]="{'is-invalid': electeurCni.touched && electeurCni.
-                                    invalid,'is-valid':electeurCni.touched && electeurCni.valid}" [required]="true"
-                                    [(ngModel)]="electeur.cni" type="text" name="cni" class="form-control" id="cni"
-                                    placeholder="Entrer votre cni">
+                            <div class="col">
+                                <mat-form-field class="example-full-width" appearance="fill">
+                                    <mat-label>Carte d'identite national</mat-label>
+                                    <input matInput #electeurCni="ngModel" [ngClass]="{'is-invalid': electeurCni.touched && electeurCni.
+                                        invalid,'is-valid':electeurCni.touched && electeurCni.valid}" [required]="true"
+                                        [(ngModel)]="electeur.cni" type="text" name="cni" id="cni"
+                                        placeholder="Entrer votre cni">
+                                </mat-form-field>
                             </div>
                         </div>
                     </div>
-                </div>
-                <hr>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md">
-                            <div class="form-group">
-                                <label for="nom">Date de Naissance</label>
-                                <input #electeurDateNaiss="ngModel" [ngClass]="{'is-invalid': electeurDateNaiss.touched && electeurDateNaiss.
-                    invalid,'is-valid':electeurDateNaiss.touched && electeurDateNaiss.valid}" [required]="true"
-                                    [(ngModel)]="electeur.dateNaiss" type="date" name="dateNaiss" class="form-control"
-                                    id="description" placeholder="Entrer votre date de naissance">
+                    <hr>
+
+                    <div class="container">
+
+                        <div class="row">
+
+                            <div class="col-md">
+
+
+                                <mat-form-field appearance="fill" class="example-form-field">
+                                    <mat-label>Date de Naissance</mat-label>
+                                    <input matInput [matDatepicker]="datepicker" #electeurDateNaiss="ngModel" [ngClass]="{'is-invalid': electeurDateNaiss.touched && electeurDateNaiss.
+                                            invalid,'is-valid':electeurDateNaiss.touched && electeurDateNaiss.valid}"
+                                        [required]="true" [(ngModel)]="electeur.dateNaiss" name="dateNaiss"
+                                        id="description">
+                                    <mat-hint>MM/DD/YYYY</mat-hint>
+                                    <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+                                    <mat-datepicker #datepicker>
+                                        <mat-datepicker-actions>
+                                            <button mat-button matDatepickerCancel>Annuler</button>
+                                            <button mat-raised-button color="primary"
+                                                matDatepickerApply>Appliquer</button>
+                                        </mat-datepicker-actions>
+                                    </mat-datepicker>
+                                </mat-form-field>
+
+
+
+                            </div>
+
+
+                            <div class="col-md">
+                                <mat-form-field class="example-full-width" appearance="fill">
+                                    <mat-label>Addresse</mat-label>
+                                    <input matInput #electeurAdresse="ngModel"
+                                        [ngClass]="{'is-invalid': electeurAdresse.touched && electeurAdresse.
+                                                                                                        invalid,'is-valid':electeurAdresse.touched && electeurAdresse.valid}"
+                                        [required]="true" [(ngModel)]="electeur.adresse" type="text" name="adresse"
+                                        id="adresse" placeholder="Entrer votre addresse">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md">
+
+                                <mat-form-field class="example-full-width" appearance="fill">
+                                    <mat-label>Region</mat-label>
+                                    <mat-select #circonscriptionRegion="ngModel"
+                                        [ngClass]="{'is-invalid': circonscriptionRegion.touched && circonscriptionRegion.
+                                                    invalid,'is-valid':circonscriptionRegion.touched && circonscriptionRegion.valid}" [required]="true"
+                                        [(ngModel)]="circonscription.region" required name="region">
+                                        <mat-option disabled>Selectionner votre region</mat-option>
+                                        <mat-option *ngFor="let region of regions" [value]="region">{{region}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
                             </div>
                         </div>
-                        <div class="col-md">
-                            <div class="form-group">
-                                <label for="montant">Addresse</label>
-                                <input #electeurAdresse="ngModel" [ngClass]="{'is-invalid': electeurAdresse.touched && electeurAdresse.
-                                    invalid,'is-valid':electeurAdresse.touched && electeurAdresse.valid}"
-                                    [required]="true" [(ngModel)]="electeur.adresse" type="text" name="adresse"
-                                    class="form-control" id="adresse" placeholder="Entrer votre addresse">
+                        <div class="row">
+                            <div class="col-md">
+                                <ng-container *ngIf="circonscription.region == 'Dakar'">
+
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Departement</mat-label>
+                                        <mat-select #circonscriptionDepartement="ngModel"
+                                            [ngClass]="{'is-invalid': circonscriptionDepartement.touched && circonscriptionDepartement.
+                                                invalid,'is-valid':circonscriptionDepartement.touched && circonscriptionDepartement.valid}" [required]="true"
+                                            [(ngModel)]="circonscription.departement" required name="departement">
+                                            <mat-option disabled>Selectionner votre departement</mat-option>
+                                            <mat-option *ngFor="let departement of departementDakar"
+                                                [value]="departement">
+                                                {{departement}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field>
+
+                                </ng-container>
+                                <ng-container *ngIf="circonscription.region == 'Thies'">
+
+
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Departement</mat-label>
+                                        <mat-select #circonscriptionDepartement="ngModel"
+                                            [ngClass]="{'is-invalid': circonscriptionDepartement.touched && circonscriptionDepartement.
+                                                                        invalid,'is-valid':circonscriptionDepartement.touched && circonscriptionDepartement.valid}"
+                                            [required]="true" [(ngModel)]="circonscription.departement" required
+                                            name="departement" id="sousCategorie">
+                                            <mat-option disabled selected>Selectionner votre departement</mat-option>
+                                            <mat-option *ngFor="let departement of departementThies"
+                                                [value]="departement">
+                                                {{departement}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field>
+
+                                </ng-container>
+                                <ng-container *ngIf="circonscription.region == 'Louga'">
+
+
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Departement</mat-label>
+                                        <mat-select #circonscriptionDepartement="ngModel"
+                                            [ngClass]="{'is-invalid': circonscriptionDepartement.touched && circonscriptionDepartement.
+                                                                        invalid,'is-valid':circonscriptionDepartement.touched && circonscriptionDepartement.valid}"
+                                            [required]="true" [(ngModel)]="circonscription.departement" required
+                                            name="departement" id="sousCategorie">
+                                            <mat-option disabled selected>Selectionner votre departement</mat-option>
+                                            <mat-option *ngFor="let departement of departementLouga"
+                                                [value]="departement">
+                                                {{departement}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field>
+
+                                </ng-container>
+                                <ng-container *ngIf="circonscription.region == 'Kaolack'">
+
+
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Departement</mat-label>
+                                        <mat-select #circonscriptionDepartement="ngModel"
+                                            [ngClass]="{'is-invalid': circonscriptionDepartement.touched && circonscriptionDepartement.
+                                                                        invalid,'is-valid':circonscriptionDepartement.touched && circonscriptionDepartement.valid}"
+                                            [required]="true" [(ngModel)]="circonscription.departement" required
+                                            name="departement" id="sousCategorie">
+                                            <mat-option disabled selected>Selectionner votre departement</mat-option>
+                                            <mat-option *ngFor="let departement of departementKaolack"
+                                                [value]="departement">
+                                                {{departement}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field>
+
+                                </ng-container>
+                                <ng-container *ngIf="circonscription.region == 'Diourbel'">
+
+
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Departement</mat-label>
+                                        <mat-select #circonscriptionDepartement="ngModel"
+                                            [ngClass]="{'is-invalid': circonscriptionDepartement.touched && circonscriptionDepartement.
+                                                                        invalid,'is-valid':circonscriptionDepartement.touched && circonscriptionDepartement.valid}"
+                                            [required]="true" [(ngModel)]="circonscription.departement" required
+                                            name="departement" id="sousCategorie">
+                                            <mat-option disabled selected>Selectionner votre departement</mat-option>
+                                            <mat-option *ngFor="let departement of departementDiourbel"
+                                                [value]="departement">
+                                                {{departement}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field>
+
+                                </ng-container>
+                                <ng-container *ngIf="circonscription.region == 'Fatick'">
+
+
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Departement</mat-label>
+                                        <mat-select #circonscriptionDepartement="ngModel"
+                                            [ngClass]="{'is-invalid': circonscriptionDepartement.touched && circonscriptionDepartement.
+                                                                        invalid,'is-valid':circonscriptionDepartement.touched && circonscriptionDepartement.valid}"
+                                            [required]="true" [(ngModel)]="circonscription.departement" required
+                                            name="departement" id="sousCategorie">
+                                            <mat-option disabled selected>Selectionner votre departement</mat-option>
+                                            <mat-option *ngFor="let departement of departementFatick"
+                                                [value]="departement">
+                                                {{departement}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field>
+
+                                </ng-container>
+                                <ng-container *ngIf="circonscription.region == 'Kaffrine'">
+
+
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Departement</mat-label>
+                                        <mat-select #circonscriptionDepartement="ngModel"
+                                            [ngClass]="{'is-invalid': circonscriptionDepartement.touched && circonscriptionDepartement.
+                                                                        invalid,'is-valid':circonscriptionDepartement.touched && circonscriptionDepartement.valid}"
+                                            [required]="true" [(ngModel)]="circonscription.departement" required
+                                            name="departement" id="sousCategorie">
+                                            <mat-option disabled selected>Selectionner votre departement</mat-option>
+                                            <mat-option *ngFor="let departement of departementKaffrine"
+                                                [value]="departement">
+                                                {{departement}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field>
+
+                                </ng-container>
+                                <ng-container *ngIf="circonscription.region == 'Saint-Louis'">
+
+
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Departement</mat-label>
+                                        <mat-select #circonscriptionDepartement="ngModel"
+                                            [ngClass]="{'is-invalid': circonscriptionDepartement.touched && circonscriptionDepartement.
+                                                                        invalid,'is-valid':circonscriptionDepartement.touched && circonscriptionDepartement.valid}"
+                                            [required]="true" [(ngModel)]="circonscription.departement" required
+                                            name="departement" id="sousCategorie">
+                                            <mat-option disabled selected>Selectionner votre departement</mat-option>
+                                            <mat-option *ngFor="let departement of departementSaintLouis"
+                                                [value]="departement">
+                                                {{departement}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field>
+
+                                </ng-container>
+                                <ng-container *ngIf="circonscription.region == 'Matam'">
+
+
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Departement</mat-label>
+                                        <mat-select #circonscriptionDepartement="ngModel"
+                                            [ngClass]="{'is-invalid': circonscriptionDepartement.touched && circonscriptionDepartement.
+                                                                        invalid,'is-valid':circonscriptionDepartement.touched && circonscriptionDepartement.valid}"
+                                            [required]="true" [(ngModel)]="circonscription.departement" required
+                                            name="departement" id="sousCategorie">
+                                            <mat-option disabled selected>Selectionner votre departement</mat-option>
+                                            <mat-option *ngFor="let departement of departementMatam"
+                                                [value]="departement">
+                                                {{departement}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field>
+
+                                </ng-container>
+                                <ng-container *ngIf="circonscription.region == 'Kédougou'">
+
+
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Departement</mat-label>
+                                        <mat-select #circonscriptionDepartement="ngModel"
+                                            [ngClass]="{'is-invalid': circonscriptionDepartement.touched && circonscriptionDepartement.
+                                                                        invalid,'is-valid':circonscriptionDepartement.touched && circonscriptionDepartement.valid}"
+                                            [required]="true" [(ngModel)]="circonscription.departement" required
+                                            name="departement" id="sousCategorie">
+                                            <mat-option disabled selected>Selectionner votre departement</mat-option>
+                                            <mat-option *ngFor="let departement of departementKedougou"
+                                                [value]="departement">
+                                                {{departement}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field>
+
+                                </ng-container>
+                                <ng-container *ngIf="circonscription.region == 'Tambacounda'">
+
+
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Departement</mat-label>
+                                        <mat-select #circonscriptionDepartement="ngModel"
+                                            [ngClass]="{'is-invalid': circonscriptionDepartement.touched && circonscriptionDepartement.
+                                                                        invalid,'is-valid':circonscriptionDepartement.touched && circonscriptionDepartement.valid}"
+                                            [required]="true" [(ngModel)]="circonscription.departement" required
+                                            name="departement" id="sousCategorie">
+                                            <mat-option disabled selected>Selectionner votre departement</mat-option>
+                                            <mat-option *ngFor="let departement of departementTambacounda"
+                                                [value]="departement">
+                                                {{departement}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field>
+
+                                </ng-container>
+                                <ng-container *ngIf="circonscription.region == 'Kolda'">
+
+
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Departement</mat-label>
+                                        <mat-select #circonscriptionDepartement="ngModel"
+                                            [ngClass]="{'is-invalid': circonscriptionDepartement.touched && circonscriptionDepartement.
+                                                                        invalid,'is-valid':circonscriptionDepartement.touched && circonscriptionDepartement.valid}"
+                                            [required]="true" [(ngModel)]="circonscription.departement" required
+                                            name="departement" id="sousCategorie">
+                                            <mat-option disabled selected>Selectionner votre departement</mat-option>
+                                            <mat-option *ngFor="let departement of departementKolda"
+                                                [value]="departement">
+                                                {{departement}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field>
+
+                                </ng-container>
+                                <ng-container *ngIf="circonscription.region == 'Sédhiou'">
+
+
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Departement</mat-label>
+                                        <mat-select #circonscriptionDepartement="ngModel"
+                                            [ngClass]="{'is-invalid': circonscriptionDepartement.touched && circonscriptionDepartement.
+                                                                        invalid,'is-valid':circonscriptionDepartement.touched && circonscriptionDepartement.valid}"
+                                            [required]="true" [(ngModel)]="circonscription.departement" required
+                                            name="departement" id="sousCategorie">
+                                            <mat-option disabled selected>Selectionner votre departement</mat-option>
+                                            <mat-option *ngFor="let departement of departementSedhiou"
+                                                [value]="departement">
+                                                {{departement}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field>
+
+                                </ng-container>
+                                <ng-container *ngIf="circonscription.region == 'Ziguinchor'">
+
+
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Departement</mat-label>
+                                        <mat-select #circonscriptionDepartement="ngModel"
+                                            [ngClass]="{'is-invalid': circonscriptionDepartement.touched && circonscriptionDepartement.
+                                                                                        invalid,'is-valid':circonscriptionDepartement.touched && circonscriptionDepartement.valid}"
+                                            [required]="true" [(ngModel)]="circonscription.departement" required
+                                            name="departement" id="sousCategorie">
+                                            <mat-option disabled selected>Selectionner votre departement</mat-option>
+                                            <mat-option *ngFor="let departement of departementZiguinchor"
+                                                [value]="departement">
+                                                {{departement}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field>
+
+                                </ng-container>
+
+
+                            </div>
+                            <div class="col-md">
+
+
+                                <ng-container *ngIf="circonscription.departement == 'Dakar'">
+
+
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Commune</mat-label>
+                                        <mat-select #circonscriptionCommune="ngModel"
+                                            [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
+                                                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
+                                            [required]="true" [(ngModel)]="circonscription.commune" required
+                                            name="departement" id="commune">
+                                            <mat-option disabled selected>Selectionner votre Commune</mat-option>
+                                            <mat-option *ngFor="let commune of communeDakar" [value]="commune">
+                                                {{commune}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field>
+
+                                </ng-container>
+                                <ng-container *ngIf="circonscription.departement == 'Pikine'">
+
+
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Commune</mat-label>
+                                        <mat-select #circonscriptionCommune="ngModel"
+                                            [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
+                                                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
+                                            [required]="true" [(ngModel)]="circonscription.commune" required
+                                            name="departement" id="commune">
+                                            <mat-option disabled selected>Selectionner votre Commune</mat-option>
+                                            <mat-option *ngFor="let commune of communePikine" [value]="commune">
+                                                {{commune}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field>
+
+                                </ng-container>
+                                <ng-container *ngIf="circonscription.departement == 'Guédiawaye'">
+
+
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Commune</mat-label>
+                                        <mat-select #circonscriptionCommune="ngModel"
+                                            [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
+                                                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
+                                            [required]="true" [(ngModel)]="circonscription.commune" required
+                                            name="departement" id="commune">
+                                            <mat-option disabled selected>Selectionner votre Commune</mat-option>
+                                            <mat-option *ngFor="let commune of communeGuediawaye" [value]="commune">
+                                                {{commune}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field>
+
+                                </ng-container>
+                                <ng-container *ngIf="circonscription.departement == 'Rufisque'">
+
+
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Commune</mat-label>
+                                        <mat-select #circonscriptionCommune="ngModel"
+                                            [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
+                                                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
+                                            [required]="true" [(ngModel)]="circonscription.commune" required
+                                            name="departement" id="commune">
+                                            <mat-option disabled selected>Selectionner votre Commune</mat-option>
+                                            <mat-option *ngFor="let commune of communeRufisque" [value]="commune">
+                                                {{commune}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field>
+
+                                </ng-container>
+                                <ng-container *ngIf="circonscription.departement == 'Thies'">
+
+
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Commune</mat-label>
+                                        <mat-select #circonscriptionCommune="ngModel"
+                                            [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
+                                                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
+                                            [required]="true" [(ngModel)]="circonscription.commune" required
+                                            name="departement" id="commune">
+                                            <mat-option disabled selected>Selectionner votre Commune</mat-option>
+                                            <mat-option *ngFor="let commune of communeThies" [value]="commune">
+                                                {{commune}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field>
+
+                                </ng-container>
+                                <ng-container *ngIf="circonscription.departement == 'Tivaouane'">
+
+
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Commune</mat-label>
+                                        <mat-select #circonscriptionCommune="ngModel"
+                                            [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
+                                                                                                                    invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
+                                            [required]="true" [(ngModel)]="circonscription.commune" required
+                                            name="departement" id="commune">
+                                            <mat-option disabled selected>Selectionner votre Commune</mat-option>
+                                            <mat-option *ngFor="let commune of communeTivaouane" [value]="commune">
+                                                {{commune}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field>
+
+                                </ng-container>
+                                <ng-container *ngIf="circonscription.departement == 'Mbour'">
+
+
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Commune</mat-label>
+                                        <mat-select #circonscriptionCommune="ngModel"
+                                            [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
+                                                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
+                                            [required]="true" [(ngModel)]="circonscription.commune" required
+                                            name="departement" id="commune">
+                                            <mat-option disabled selected>Selectionner votre Commune</mat-option>
+                                            <mat-option *ngFor="let commune of communeMbour" [value]="commune">
+                                                {{commune}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field>
+
+                                </ng-container>
+                                <ng-container *ngIf="circonscription.departement == 'Louga'">
+
+
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Commune</mat-label>
+                                        <mat-select #circonscriptionCommune="ngModel"
+                                            [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
+                                                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
+                                            [required]="true" [(ngModel)]="circonscription.commune" required
+                                            name="departement" id="commune">
+                                            <mat-option disabled selected>Selectionner votre Commune</mat-option>
+                                            <mat-option *ngFor="let commune of communeLouga" [value]="commune">
+                                                {{commune}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field>
+
+                                </ng-container>
+                                <ng-container *ngIf="circonscription.departement == 'Kébémer'">
+
+
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Commune</mat-label>
+                                        <mat-select #circonscriptionCommune="ngModel"
+                                            [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
+                                                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
+                                            [required]="true" [(ngModel)]="circonscription.commune" required
+                                            name="departement" id="commune">
+                                            <mat-option disabled selected>Selectionner votre Commune</mat-option>
+                                            <mat-option *ngFor="let commune of communeKebemer" [value]="commune">
+                                                {{commune}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field>
+
+                                </ng-container>
+                                <ng-container *ngIf="circonscription.departement == 'Linguère'">
+
+
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Commune</mat-label>
+                                        <mat-select #circonscriptionCommune="ngModel"
+                                            [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
+                                                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
+                                            [required]="true" [(ngModel)]="circonscription.commune" required
+                                            name="departement" id="commune">
+                                            <mat-option disabled selected>Selectionner votre Commune</mat-option>
+                                            <mat-option *ngFor="let commune of communeLinguere" [value]="commune">
+                                                {{commune}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field>
+
+                                </ng-container>
+                                <ng-container *ngIf="circonscription.departement == 'Kaolack'">
+
+
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Commune</mat-label>
+                                        <mat-select #circonscriptionCommune="ngModel"
+                                            [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
+                                                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
+                                            [required]="true" [(ngModel)]="circonscription.commune" required
+                                            name="departement" id="commune">
+                                            <mat-option disabled selected>Selectionner votre Commune</mat-option>
+                                            <mat-option *ngFor="let commune of communeKaolack" [value]="commune">
+                                                {{commune}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field>
+
+                                </ng-container>
+                                <ng-container *ngIf="circonscription.departement == 'Guinguinéo'">
+
+
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Commune</mat-label>
+                                        <mat-select #circonscriptionCommune="ngModel"
+                                            [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
+                                                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
+                                            [required]="true" [(ngModel)]="circonscription.commune" required
+                                            name="departement" id="commune">
+                                            <mat-option disabled selected>Selectionner votre Commune</mat-option>
+                                            <mat-option *ngFor="let commune of communeGuinguineo" [value]="commune">
+                                                {{commune}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field>
+
+                                </ng-container>
+                                <ng-container *ngIf="circonscription.departement == 'Nioro du Rip'">
+
+
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Commune</mat-label>
+                                        <mat-select #circonscriptionCommune="ngModel"
+                                            [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
+                                                                                                                    invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
+                                            [required]="true" [(ngModel)]="circonscription.commune" required
+                                            name="departement" id="commune">
+                                            <mat-option disabled selected>Selectionner votre Commune</mat-option>
+                                            <mat-option *ngFor="let commune of communeNioroduRip" [value]="commune">
+                                                {{commune}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field>
+
+                                </ng-container>
+                                <ng-container *ngIf="circonscription.departement == 'Diourbel'">
+
+
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Commune</mat-label>
+                                        <mat-select #circonscriptionCommune="ngModel"
+                                            [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
+                                                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
+                                            [required]="true" [(ngModel)]="circonscription.commune" required
+                                            name="departement" id="commune">
+                                            <mat-option disabled selected>Selectionner votre Commune</mat-option>
+                                            <mat-option *ngFor="let commune of communeDiourbel" [value]="commune">
+                                                {{commune}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field>
+
+                                </ng-container>
+                                <ng-container *ngIf="circonscription.departement == 'Bambey'">
+
+
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Commune</mat-label>
+                                        <mat-select #circonscriptionCommune="ngModel"
+                                            [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
+                                                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
+                                            [required]="true" [(ngModel)]="circonscription.commune" required
+                                            name="departement" id="commune">
+                                            <mat-option disabled selected>Selectionner votre Commune</mat-option>
+                                            <mat-option *ngFor="let commune of communeBambey" [value]="commune">
+                                                {{commune}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field>
+
+                                </ng-container>
+                                <ng-container *ngIf="circonscription.departement == 'Mbacké'">
+
+
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Commune</mat-label>
+                                        <mat-select #circonscriptionCommune="ngModel"
+                                            [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
+                                                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
+                                            [required]="true" [(ngModel)]="circonscription.commune" required
+                                            name="departement" id="commune">
+                                            <mat-option disabled selected>Selectionner votre Commune</mat-option>
+                                            <mat-option *ngFor="let commune of communeMbacke" [value]="commune">
+                                                {{commune}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field>
+
+                                </ng-container>
+                                <ng-container *ngIf="circonscription.departement == 'Fatick'">
+
+
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Commune</mat-label>
+                                        <mat-select #circonscriptionCommune="ngModel"
+                                            [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
+                                                                                                                    invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
+                                            [required]="true" [(ngModel)]="circonscription.commune" required
+                                            name="departement" id="commune">
+                                            <mat-option disabled selected>Selectionner votre Commune</mat-option>
+                                            <mat-option *ngFor="let commune of communeFatick" [value]="commune">
+                                                {{commune}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field>
+
+                                </ng-container>
+                                <ng-container *ngIf="circonscription.departement == 'Foundiougne'">
+
+
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Commune</mat-label>
+                                        <mat-select #circonscriptionCommune="ngModel"
+                                            [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
+                                                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
+                                            [required]="true" [(ngModel)]="circonscription.commune" required
+                                            name="departement" id="commune">
+                                            <mat-option disabled selected>Selectionner votre Commune</mat-option>
+                                            <mat-option *ngFor="let commune of communeFoundiougne" [value]="commune">
+                                                {{commune}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field>
+
+                                </ng-container>
+                                <ng-container *ngIf="circonscription.departement == 'Gossas'">
+
+
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Commune</mat-label>
+                                        <mat-select #circonscriptionCommune="ngModel"
+                                            [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
+                                                                                                                    invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
+                                            [required]="true" [(ngModel)]="circonscription.commune" required
+                                            name="departement" id="commune">
+                                            <mat-option disabled selected>Selectionner votre Commune</mat-option>
+                                            <mat-option *ngFor="let commune of communeGossas" [value]="commune">
+                                                {{commune}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field>
+
+                                </ng-container>
+                                <ng-container *ngIf="circonscription.departement == 'Kaffrine'">
+
+
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Commune</mat-label>
+                                        <mat-select #circonscriptionCommune="ngModel"
+                                            [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
+                                                                                                                    invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
+                                            [required]="true" [(ngModel)]="circonscription.commune" required
+                                            name="departement" id="commune">
+                                            <mat-option disabled selected>Selectionner votre Commune</mat-option>
+                                            <mat-option *ngFor="let commune of communeKaffrine" [value]="commune">
+                                                {{commune}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field>
+
+                                </ng-container>
+                                <ng-container *ngIf="circonscription.departement == 'Birkilane'">
+
+
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Commune</mat-label>
+                                        <mat-select #circonscriptionCommune="ngModel"
+                                            [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
+                                                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
+                                            [required]="true" [(ngModel)]="circonscription.commune" required
+                                            name="departement" id="commune">
+                                            <mat-option disabled selected>Selectionner votre Commune</mat-option>
+                                            <mat-option *ngFor="let commune of communeBirkilane" [value]="commune">
+                                                {{commune}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field>
+
+                                </ng-container>
+                                <ng-container *ngIf="circonscription.departement == 'Malème-Hodar'">
+
+
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Commune</mat-label>
+                                        <mat-select #circonscriptionCommune="ngModel"
+                                            [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
+                                                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
+                                            [required]="true" [(ngModel)]="circonscription.commune" required
+                                            name="departement" id="commune">
+                                            <mat-option disabled selected>Selectionner votre Commune</mat-option>
+                                            <mat-option *ngFor="let commune of communeMalemeHodar" [value]="commune">
+                                                {{commune}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field>
+
+                                </ng-container>
+                                <ng-container *ngIf="circonscription.departement == 'Koungheul'">
+
+
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Commune</mat-label>
+                                        <mat-select #circonscriptionCommune="ngModel"
+                                            [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
+                                                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
+                                            [required]="true" [(ngModel)]="circonscription.commune" required
+                                            name="departement" id="commune">
+                                            <mat-option disabled selected>Selectionner votre Commune</mat-option>
+                                            <mat-option *ngFor="let commune of communeKoungheul" [value]="commune">
+                                                {{commune}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field>
+
+                                </ng-container>
+                                <ng-container *ngIf="circonscription.departement == 'Saint-Louis'">
+
+
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Commune</mat-label>
+                                        <mat-select #circonscriptionCommune="ngModel"
+                                            [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
+                                                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
+                                            [required]="true" [(ngModel)]="circonscription.commune" required
+                                            name="departement" id="commune">
+                                            <mat-option disabled selected>Selectionner votre Commune</mat-option>
+                                            <mat-option *ngFor="let commune of communeSaintLouis" [value]="commune">
+                                                {{commune}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field>
+
+                                </ng-container>
+                                <ng-container *ngIf="circonscription.departement == 'Dagana'">
+
+
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Commune</mat-label>
+                                        <mat-select #circonscriptionCommune="ngModel"
+                                            [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
+                                                                                                                    invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
+                                            [required]="true" [(ngModel)]="circonscription.commune" required
+                                            name="departement" id="commune">
+                                            <mat-option disabled selected>Selectionner votre Commune</mat-option>
+                                            <mat-option *ngFor="let commune of communeDagana" [value]="commune">
+                                                {{commune}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field>
+
+                                </ng-container>
+                                <ng-container *ngIf="circonscription.departement == 'Podor'">
+
+
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Commune</mat-label>
+                                        <mat-select #circonscriptionCommune="ngModel"
+                                            [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
+                                                                                                                    invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
+                                            [required]="true" [(ngModel)]="circonscription.commune" required
+                                            name="departement" id="commune">
+                                            <mat-option disabled selected>Selectionner votre Commune</mat-option>
+                                            <mat-option *ngFor="let commune of communePodor" [value]="commune">
+                                                {{commune}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field>
+
+                                </ng-container>
+                                <ng-container *ngIf="circonscription.departement == 'Matam'">
+
+
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Commune</mat-label>
+                                        <mat-select #circonscriptionCommune="ngModel"
+                                            [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
+                                                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
+                                            [required]="true" [(ngModel)]="circonscription.commune" required
+                                            name="departement" id="commune">
+                                            <mat-option disabled selected>Selectionner votre Commune</mat-option>
+                                            <mat-option *ngFor="let commune of communeMatam" [value]="commune">
+                                                {{commune}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field>
+
+                                </ng-container>
+                                <ng-container *ngIf="circonscription.departement == 'Kanel'">
+
+
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Commune</mat-label>
+                                        <mat-select #circonscriptionCommune="ngModel"
+                                            [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
+                                                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
+                                            [required]="true" [(ngModel)]="circonscription.commune" required
+                                            name="departement" id="commune">
+                                            <mat-option disabled selected>Selectionner votre Commune</mat-option>
+                                            <mat-option *ngFor="let commune of communeKanel" [value]="commune">
+                                                {{commune}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field>
+
+                                </ng-container>
+                                <ng-container *ngIf="circonscription.departement == 'Ranérou'">
+
+
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Commune</mat-label>
+                                        <mat-select #circonscriptionCommune="ngModel"
+                                            [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
+                                                                                                                    invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
+                                            [required]="true" [(ngModel)]="circonscription.commune" required
+                                            name="departement" id="commune">
+                                            <mat-option disabled selected>Selectionner votre Commune</mat-option>
+                                            <mat-option *ngFor="let commune of communeRanerou" [value]="commune">
+                                                {{commune}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field>
+
+                                </ng-container>
+                                <ng-container *ngIf="circonscription.departement == 'Kédougou'">
+
+
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Commune</mat-label>
+                                        <mat-select #circonscriptionCommune="ngModel"
+                                            [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
+                                                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
+                                            [required]="true" [(ngModel)]="circonscription.commune" required
+                                            name="departement" id="commune">
+                                            <mat-option disabled selected>Selectionner votre Commune</mat-option>
+                                            <mat-option *ngFor="let commune of communeKedougou" [value]="commune">
+                                                {{commune}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field>
+
+                                </ng-container>
+                                <ng-container *ngIf="circonscription.departement == 'Salémata'">
+
+
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Commune</mat-label>
+                                        <mat-select #circonscriptionCommune="ngModel"
+                                            [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
+                                                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
+                                            [required]="true" [(ngModel)]="circonscription.commune" required
+                                            name="departement" id="commune">
+                                            <mat-option disabled selected>Selectionner votre Commune</mat-option>
+                                            <mat-option *ngFor="let commune of communeSalemata" [value]="commune">
+                                                {{commune}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field>
+
+                                </ng-container>
+                                <ng-container *ngIf="circonscription.departement == 'Saraya'">
+
+
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Commune</mat-label>
+                                        <mat-select #circonscriptionCommune="ngModel"
+                                            [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
+                                                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
+                                            [required]="true" [(ngModel)]="circonscription.commune" required
+                                            name="departement" id="commune">
+                                            <mat-option disabled selected>Selectionner votre Commune</mat-option>
+                                            <mat-option *ngFor="let commune of communeSaraya" [value]="commune">
+                                                {{commune}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field>
+
+                                </ng-container>
+                                <ng-container *ngIf="circonscription.departement == 'Tambacounda'">
+
+
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Commune</mat-label>
+                                        <mat-select #circonscriptionCommune="ngModel"
+                                            [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
+                                                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
+                                            [required]="true" [(ngModel)]="circonscription.commune" required
+                                            name="departement" id="commune">
+                                            <mat-option disabled selected>Selectionner votre Commune</mat-option>
+                                            <mat-option *ngFor="let commune of communeTambacounda" [value]="commune">
+                                                {{commune}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field>
+
+                                </ng-container>
+                                <ng-container *ngIf="circonscription.departement == 'Goudiry'">
+
+
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Commune</mat-label>
+                                        <mat-select #circonscriptionCommune="ngModel"
+                                            [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
+                                                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
+                                            [required]="true" [(ngModel)]="circonscription.commune" required
+                                            name="departement" id="commune">
+                                            <mat-option disabled selected>Selectionner votre Commune</mat-option>
+                                            <mat-option *ngFor="let commune of communeGoudiry" [value]="commune">
+                                                {{commune}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field>
+
+                                </ng-container>
+                                <ng-container *ngIf="circonscription.departement == 'Bakel'">
+
+
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Commune</mat-label>
+                                        <mat-select #circonscriptionCommune="ngModel"
+                                            [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
+                                                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
+                                            [required]="true" [(ngModel)]="circonscription.commune" required
+                                            name="departement" id="commune">
+                                            <mat-option disabled selected>Selectionner votre Commune</mat-option>
+                                            <mat-option *ngFor="let commune of communeBakel" [value]="commune">
+                                                {{commune}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field>
+
+                                </ng-container>
+                                <ng-container *ngIf="circonscription.departement == 'Koumpentoum'">
+
+
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Commune</mat-label>
+                                        <mat-select #circonscriptionCommune="ngModel"
+                                            [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
+                                                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
+                                            [required]="true" [(ngModel)]="circonscription.commune" required
+                                            name="departement" id="commune">
+                                            <mat-option disabled selected>Selectionner votre Commune</mat-option>
+                                            <mat-option *ngFor="let commune of communeKoumpentoum" [value]="commune">
+                                                {{commune}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field>
+
+                                </ng-container>
+                                <ng-container *ngIf="circonscription.departement == 'Kolda'">
+
+
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Commune</mat-label>
+                                        <mat-select #circonscriptionCommune="ngModel"
+                                            [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
+                                                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
+                                            [required]="true" [(ngModel)]="circonscription.commune" required
+                                            name="departement" id="commune">
+                                            <mat-option disabled selected>Selectionner votre Commune</mat-option>
+                                            <mat-option *ngFor="let commune of communeKolda" [value]="commune">
+                                                {{commune}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field>
+
+                                </ng-container>
+                                <ng-container *ngIf="circonscription.departement == 'Médina Yoro Foulah'">
+
+
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Commune</mat-label>
+                                        <mat-select #circonscriptionCommune="ngModel"
+                                            [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
+                                                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
+                                            [required]="true" [(ngModel)]="circonscription.commune" required
+                                            name="departement" id="commune">
+                                            <mat-option disabled selected>Selectionner votre Commune</mat-option>
+                                            <mat-option *ngFor="let commune of communeMedinaYoroFoulah"
+                                                [value]="commune">
+                                                {{commune}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field>
+
+                                </ng-container>
+                                <ng-container *ngIf="circonscription.departement == 'Vélingara'">
+
+
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Commune</mat-label>
+                                        <mat-select #circonscriptionCommune="ngModel"
+                                            [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
+                                                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
+                                            [required]="true" [(ngModel)]="circonscription.commune" required
+                                            name="departement" id="commune">
+                                            <mat-option disabled selected>Selectionner votre Commune</mat-option>
+                                            <mat-option *ngFor="let commune of communeVelingara" [value]="commune">
+                                                {{commune}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field>
+
+                                </ng-container>
+                                <ng-container *ngIf="circonscription.departement == 'Sédhiou'">
+
+
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Commune</mat-label>
+                                        <mat-select #circonscriptionCommune="ngModel"
+                                            [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
+                                                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
+                                            [required]="true" [(ngModel)]="circonscription.commune" required
+                                            name="departement" id="commune">
+                                            <mat-option disabled selected>Selectionner votre Commune</mat-option>
+                                            <mat-option *ngFor="let commune of communeSedhiou" [value]="commune">
+                                                {{commune}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field>
+
+                                </ng-container>
+                                <ng-container *ngIf="circonscription.departement == 'Bounkiling'">
+
+
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Commune</mat-label>
+                                        <mat-select #circonscriptionCommune="ngModel"
+                                            [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
+                                                                                                                    invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
+                                            [required]="true" [(ngModel)]="circonscription.commune" required
+                                            name="departement" id="commune">
+                                            <mat-option disabled selected>Selectionner votre Commune</mat-option>
+                                            <mat-option *ngFor="let commune of communeBounkiling" [value]="commune">
+                                                {{commune}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field>
+
+                                </ng-container>
+                                <ng-container *ngIf="circonscription.departement == 'Goudomp'">
+
+
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Commune</mat-label>
+                                        <mat-select #circonscriptionCommune="ngModel"
+                                            [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
+                                                                                                                    invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
+                                            [required]="true" [(ngModel)]="circonscription.commune" required
+                                            name="departement" id="commune">
+                                            <mat-option disabled selected>Selectionner votre Commune</mat-option>
+                                            <mat-option *ngFor="let commune of communeGoudomp" [value]="commune">
+                                                {{commune}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field>
+
+                                </ng-container>
+                                <ng-container *ngIf="circonscription.departement == 'Ziguinchor'">
+
+
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Commune</mat-label>
+                                        <mat-select #circonscriptionCommune="ngModel"
+                                            [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
+                                                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
+                                            [required]="true" [(ngModel)]="circonscription.commune" required
+                                            name="departement" id="commune">
+                                            <mat-option disabled selected>Selectionner votre Commune</mat-option>
+                                            <mat-option *ngFor="let commune of communeZiguinchor" [value]="commune">
+                                                {{commune}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field>
+
+                                </ng-container>
+                                <ng-container *ngIf="circonscription.departement == 'Bignona'">
+
+
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Commune</mat-label>
+                                        <mat-select #circonscriptionCommune="ngModel"
+                                            [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
+                                                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
+                                            [required]="true" [(ngModel)]="circonscription.commune" required
+                                            name="departement" id="commune">
+                                            <mat-option disabled selected>Selectionner votre Commune</mat-option>
+                                            <mat-option *ngFor="let commune of communeBignona" [value]="commune">
+                                                {{commune}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field>
+
+                                </ng-container>
+                                <ng-container *ngIf="circonscription.departement == 'Oussouye'">
+
+
+                                    <mat-form-field class="example-full-width" appearance="fill">
+                                        <mat-label>Commune</mat-label>
+                                        <mat-select #circonscriptionCommune="ngModel"
+                                            [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
+                                                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
+                                            [required]="true" [(ngModel)]="circonscription.commune" required
+                                            name="departement" id="commune">
+                                            <mat-option disabled selected>Selectionner votre Commune</mat-option>
+                                            <mat-option *ngFor="let commune of communeOussouye" [value]="commune">
+                                                {{commune}}
+                                            </mat-option>
+                                        </mat-select>
+
+                                    </mat-form-field>
+
+                                </ng-container>
+
                             </div>
                         </div>
 
                     </div>
-                </div>
-                <hr>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md">
-                            <div class="form-group">
-                                <label for="nom">Region</label>
-                                <select #circonscriptionRegion="ngModel" [ngClass]="{'is-invalid': circonscriptionRegion.touched && circonscriptionRegion.
-                                    invalid,'is-valid':circonscriptionRegion.touched && circonscriptionRegion.valid}"
-                                    [required]="true" [(ngModel)]="circonscription.region" required class="form-control"
-                                    name="region" id="sousCategorie">
-                                    <option disabled selected>Selectionner votre region</option>
-                                    <option *ngFor="let region of regions" [value]="region">
-                                        {{region}}
-                                    </option>
-                                </select>
+                    <hr>
+
+                    <div class="container">
+                        <div class="row">
+
+                            <div class="col-md">
+                                <mat-form-field class="example-full-width" appearance="fill">
+                                    <mat-label> Email</mat-label>
+                                    <input matInput #electeurEmail="ngModel"
+                                        [ngClass]="{'is-invalid': electeurEmail.touched && electeurEmail.
+                                                                                                            invalid,'is-valid':electeurEmail.touched && electeurAdresse.valid}"
+                                        [required]="true" [(ngModel)]="electeur.email" type="email" name="electeurEmail"
+                                        id="electeurEmail" placeholder="Entrer votre  email">
+                                </mat-form-field>
                             </div>
-                        </div>
-                        <div class="col-md">
-                            <ng-container *ngIf="circonscription.region == 'Dakar'">
 
-                                <div class="form-group">
-                                    <label for="nom">Departement</label>
-                                    <select #circonscriptionDepartement="ngModel"
-                                        [ngClass]="{'is-invalid': circonscriptionDepartement.touched && circonscriptionDepartement.
-                                                                                    invalid,'is-valid':circonscriptionDepartement.touched && circonscriptionDepartement.valid}"
-                                        [required]="true" [(ngModel)]="circonscription.departement" required
-                                        class="form-control" name="departement" id="sousCategorie">
-                                        <option disabled selected>Selectionner votre departement</option>
-                                        <option *ngFor="let departement of departementDakar" [value]="departement">
-                                            {{departement}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </ng-container>
-                            <ng-container *ngIf="circonscription.region == 'Thies'">
+                            <div class="col-md">
+                                <mat-form-field class="example-full-width" appearance="fill">
+                                    <mat-label>Mot de passe</mat-label>
+                                    <input matInput #electeurPassword="ngModel"
+                                        [ngClass]="{'is-invalid': electeurPassword.touched && electeurPassword.
+                                                                                        invalid,'is-valid':electeurPassword.touched && electeurPassword.valid}"
+                                        [required]="true" [(ngModel)]="electeur.password" type="password"
+                                        name="electeurPassword" id="electeurPassword"
+                                        placeholder="Entrer votre mot de passe">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md">
+                                <mat-form-field class="example-full-width" appearance="fill">
+                                    <mat-label>Confirmer votre mot de passe</mat-label>
+                                    <input matInput #electeurPasswordConfirm="ngModel"
+                                        [ngClass]="{'is-invalid': electeurPasswordConfirm.touched && electeurPasswordConfirm.
+                                                                                        invalid,'is-valid':electeurPasswordConfirm.touched && electeurPasswordConfirm.valid}"
+                                        [required]="true" [(ngModel)]="electeur.passwordConfirm" type="password"
+                                        name="electeurPasswordConfirm" id="electeurPasswordConfirm"
+                                        placeholder="Confirmer votre mot de passe">
+                                </mat-form-field>
 
-                                <div class="form-group">
-                                    <label for="nom">Departement</label>
-                                    <select #circonscriptionDepartement="ngModel"
-                                        [ngClass]="{'is-invalid': circonscriptionDepartement.touched && circonscriptionDepartement.
-                                                                    invalid,'is-valid':circonscriptionDepartement.touched && circonscriptionDepartement.valid}"
-                                        [required]="true" [(ngModel)]="circonscription.departement" required
-                                        class="form-control" name="departement" id="sousCategorie">
-                                        <option disabled selected>Selectionner votre departement</option>
-                                        <option *ngFor="let departement of departementThies" [value]="departement">
-                                            {{departement}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </ng-container>
-                            <ng-container *ngIf="circonscription.region == 'Louga'">
-
-                                <div class="form-group">
-                                    <label for="nom">Departement</label>
-                                    <select #circonscriptionDepartement="ngModel"
-                                        [ngClass]="{'is-invalid': circonscriptionDepartement.touched && circonscriptionDepartement.
-                                                                    invalid,'is-valid':circonscriptionDepartement.touched && circonscriptionDepartement.valid}"
-                                        [required]="true" [(ngModel)]="circonscription.departement" required
-                                        class="form-control" name="departement" id="sousCategorie">
-                                        <option disabled selected>Selectionner votre departement</option>
-                                        <option *ngFor="let departement of departementLouga" [value]="departement">
-                                            {{departement}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </ng-container>
-                            <ng-container *ngIf="circonscription.region == 'Kaolack'">
-
-                                <div class="form-group">
-                                    <label for="nom">Departement</label>
-                                    <select #circonscriptionDepartement="ngModel"
-                                        [ngClass]="{'is-invalid': circonscriptionDepartement.touched && circonscriptionDepartement.
-                                                                    invalid,'is-valid':circonscriptionDepartement.touched && circonscriptionDepartement.valid}"
-                                        [required]="true" [(ngModel)]="circonscription.departement" required
-                                        class="form-control" name="departement" id="sousCategorie">
-                                        <option disabled selected>Selectionner votre departement</option>
-                                        <option *ngFor="let departement of departementKaolack" [value]="departement">
-                                            {{departement}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </ng-container>
-                            <ng-container *ngIf="circonscription.region == 'Diourbel'">
-
-                                <div class="form-group">
-                                    <label for="nom">Departement</label>
-                                    <select #circonscriptionDepartement="ngModel"
-                                        [ngClass]="{'is-invalid': circonscriptionDepartement.touched && circonscriptionDepartement.
-                                                                    invalid,'is-valid':circonscriptionDepartement.touched && circonscriptionDepartement.valid}"
-                                        [required]="true" [(ngModel)]="circonscription.departement" required
-                                        class="form-control" name="departement" id="sousCategorie">
-                                        <option disabled selected>Selectionner votre departement</option>
-                                        <option *ngFor="let departement of departementDiourbel" [value]="departement">
-                                            {{departement}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </ng-container>
-                            <ng-container *ngIf="circonscription.region == 'Fatick'">
-
-                                <div class="form-group">
-                                    <label for="nom">Departement</label>
-                                    <select #circonscriptionDepartement="ngModel"
-                                        [ngClass]="{'is-invalid': circonscriptionDepartement.touched && circonscriptionDepartement.
-                                                                    invalid,'is-valid':circonscriptionDepartement.touched && circonscriptionDepartement.valid}"
-                                        [required]="true" [(ngModel)]="circonscription.departement" required
-                                        class="form-control" name="departement" id="sousCategorie">
-                                        <option disabled selected>Selectionner votre departement</option>
-                                        <option *ngFor="let departement of departementFatick" [value]="departement">
-                                            {{departement}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </ng-container>
-                            <ng-container *ngIf="circonscription.region == 'Kaffrine'">
-
-                                <div class="form-group">
-                                    <label for="nom">Departement</label>
-                                    <select #circonscriptionDepartement="ngModel"
-                                        [ngClass]="{'is-invalid': circonscriptionDepartement.touched && circonscriptionDepartement.
-                                                                    invalid,'is-valid':circonscriptionDepartement.touched && circonscriptionDepartement.valid}"
-                                        [required]="true" [(ngModel)]="circonscription.departement" required
-                                        class="form-control" name="departement" id="sousCategorie">
-                                        <option disabled selected>Selectionner votre departement</option>
-                                        <option *ngFor="let departement of departementKaffrine" [value]="departement">
-                                            {{departement}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </ng-container>
-                            <ng-container *ngIf="circonscription.region == 'Saint-Louis'">
-
-                                <div class="form-group">
-                                    <label for="nom">Departement</label>
-                                    <select #circonscriptionDepartement="ngModel"
-                                        [ngClass]="{'is-invalid': circonscriptionDepartement.touched && circonscriptionDepartement.
-                                                                    invalid,'is-valid':circonscriptionDepartement.touched && circonscriptionDepartement.valid}"
-                                        [required]="true" [(ngModel)]="circonscription.departement" required
-                                        class="form-control" name="departement" id="sousCategorie">
-                                        <option disabled selected>Selectionner votre departement</option>
-                                        <option *ngFor="let departement of departementSaintLouis" [value]="departement">
-                                            {{departement}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </ng-container>
-                            <ng-container *ngIf="circonscription.region == 'Matam'">
-
-                                <div class="form-group">
-                                    <label for="nom">Departement</label>
-                                    <select #circonscriptionDepartement="ngModel"
-                                        [ngClass]="{'is-invalid': circonscriptionDepartement.touched && circonscriptionDepartement.
-                                                                    invalid,'is-valid':circonscriptionDepartement.touched && circonscriptionDepartement.valid}"
-                                        [required]="true" [(ngModel)]="circonscription.departement" required
-                                        class="form-control" name="departement" id="sousCategorie">
-                                        <option disabled selected>Selectionner votre departement</option>
-                                        <option *ngFor="let departement of departementMatam" [value]="departement">
-                                            {{departement}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </ng-container>
-                            <ng-container *ngIf="circonscription.region == 'Kédougou'">
-
-                                <div class="form-group">
-                                    <label for="nom">Departement</label>
-                                    <select #circonscriptionDepartement="ngModel"
-                                        [ngClass]="{'is-invalid': circonscriptionDepartement.touched && circonscriptionDepartement.
-                                                                    invalid,'is-valid':circonscriptionDepartement.touched && circonscriptionDepartement.valid}"
-                                        [required]="true" [(ngModel)]="circonscription.departement" required
-                                        class="form-control" name="departement" id="sousCategorie">
-                                        <option disabled selected>Selectionner votre departement</option>
-                                        <option *ngFor="let departement of departementKedougou" [value]="departement">
-                                            {{departement}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </ng-container>
-                            <ng-container *ngIf="circonscription.region == 'Tambacounda'">
-
-                                <div class="form-group">
-                                    <label for="nom">Departement</label>
-                                    <select #circonscriptionDepartement="ngModel"
-                                        [ngClass]="{'is-invalid': circonscriptionDepartement.touched && circonscriptionDepartement.
-                                                                    invalid,'is-valid':circonscriptionDepartement.touched && circonscriptionDepartement.valid}"
-                                        [required]="true" [(ngModel)]="circonscription.departement" required
-                                        class="form-control" name="departement" id="sousCategorie">
-                                        <option disabled selected>Selectionner votre departement</option>
-                                        <option *ngFor="let departement of departementTambacounda"
-                                            [value]="departement">
-                                            {{departement}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </ng-container>
-                            <ng-container *ngIf="circonscription.region == 'Kolda'">
-
-                                <div class="form-group">
-                                    <label for="nom">Departement</label>
-                                    <select #circonscriptionDepartement="ngModel"
-                                        [ngClass]="{'is-invalid': circonscriptionDepartement.touched && circonscriptionDepartement.
-                                                                    invalid,'is-valid':circonscriptionDepartement.touched && circonscriptionDepartement.valid}"
-                                        [required]="true" [(ngModel)]="circonscription.departement" required
-                                        class="form-control" name="departement" id="sousCategorie">
-                                        <option disabled selected>Selectionner votre departement</option>
-                                        <option *ngFor="let departement of departementKolda" [value]="departement">
-                                            {{departement}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </ng-container>
-                            <ng-container *ngIf="circonscription.region == 'Sédhiou'">
-
-                                <div class="form-group">
-                                    <label for="nom">Departement</label>
-                                    <select #circonscriptionDepartement="ngModel"
-                                        [ngClass]="{'is-invalid': circonscriptionDepartement.touched && circonscriptionDepartement.
-                                                                    invalid,'is-valid':circonscriptionDepartement.touched && circonscriptionDepartement.valid}"
-                                        [required]="true" [(ngModel)]="circonscription.departement" required
-                                        class="form-control" name="departement" id="sousCategorie">
-                                        <option disabled selected>Selectionner votre departement</option>
-                                        <option *ngFor="let departement of departementSedhiou" [value]="departement">
-                                            {{departement}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </ng-container>
-                            <ng-container *ngIf="circonscription.region == 'Ziguinchor'">
-
-                                <div class="form-group">
-                                    <label for="nom">Departement</label>
-                                    <select #circonscriptionDepartement="ngModel"
-                                        [ngClass]="{'is-invalid': circonscriptionDepartement.touched && circonscriptionDepartement.
-                                                                                    invalid,'is-valid':circonscriptionDepartement.touched && circonscriptionDepartement.valid}"
-                                        [required]="true" [(ngModel)]="circonscription.departement" required
-                                        class="form-control" name="departement" id="sousCategorie">
-                                        <option disabled selected>Selectionner votre departement</option>
-                                        <option *ngFor="let departement of departementZiguinchor" [value]="departement">
-                                            {{departement}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </ng-container>
-                        </div>
-                        <div class="col-md">
-
-
-                            <ng-container *ngIf="circonscription.departement == 'Dakar'">
-
-                                <div class="form-group">
-                                    <label for="nom">Commune</label>
-                                    <select #circonscriptionCommune="ngModel"
-                                        [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
-                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
-                                        [required]="true" [(ngModel)]="circonscription.commune" required
-                                        class="form-control" name="departement" id="commune">
-                                        <option disabled selected>Selectionner votre Commune</option>
-                                        <option *ngFor="let commune of communeDakar" [value]="commune">
-                                            {{commune}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </ng-container>
-                            <ng-container *ngIf="circonscription.departement == 'Pikine'">
-
-                                <div class="form-group">
-                                    <label for="nom">Commune</label>
-                                    <select #circonscriptionCommune="ngModel"
-                                        [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
-                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
-                                        [required]="true" [(ngModel)]="circonscription.commune" required
-                                        class="form-control" name="departement" id="commune">
-                                        <option disabled selected>Selectionner votre Commune</option>
-                                        <option *ngFor="let commune of communePikine" [value]="commune">
-                                            {{commune}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </ng-container>
-                            <ng-container *ngIf="circonscription.departement == 'Guédiawaye'">
-
-                                <div class="form-group">
-                                    <label for="nom">Commune</label>
-                                    <select #circonscriptionCommune="ngModel"
-                                        [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
-                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
-                                        [required]="true" [(ngModel)]="circonscription.commune" required
-                                        class="form-control" name="departement" id="commune">
-                                        <option disabled selected>Selectionner votre Commune</option>
-                                        <option *ngFor="let commune of communeGuediawaye" [value]="commune">
-                                            {{commune}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </ng-container>
-                            <ng-container *ngIf="circonscription.departement == 'Rufisque'">
-
-                                <div class="form-group">
-                                    <label for="nom">Commune</label>
-                                    <select #circonscriptionCommune="ngModel"
-                                        [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
-                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
-                                        [required]="true" [(ngModel)]="circonscription.commune" required
-                                        class="form-control" name="departement" id="commune">
-                                        <option disabled selected>Selectionner votre Commune</option>
-                                        <option *ngFor="let commune of communeRufisque" [value]="commune">
-                                            {{commune}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </ng-container>
-                            <ng-container *ngIf="circonscription.departement == 'Thies'">
-
-                                <div class="form-group">
-                                    <label for="nom">Commune</label>
-                                    <select #circonscriptionCommune="ngModel"
-                                        [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
-                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
-                                        [required]="true" [(ngModel)]="circonscription.commune" required
-                                        class="form-control" name="departement" id="commune">
-                                        <option disabled selected>Selectionner votre Commune</option>
-                                        <option *ngFor="let commune of communeThies" [value]="commune">
-                                            {{commune}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </ng-container>
-                            <ng-container *ngIf="circonscription.departement == 'Tivaouane'">
-
-                                <div class="form-group">
-                                    <label for="nom">Commune</label>
-                                    <select #circonscriptionCommune="ngModel"
-                                        [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
-                                                                                    invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
-                                        [required]="true" [(ngModel)]="circonscription.commune" required
-                                        class="form-control" name="departement" id="commune">
-                                        <option disabled selected>Selectionner votre Commune</option>
-                                        <option *ngFor="let commune of communeTivaouane" [value]="commune">
-                                            {{commune}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </ng-container>
-                            <ng-container *ngIf="circonscription.departement == 'Mbour'">
-
-                                <div class="form-group">
-                                    <label for="nom">Commune</label>
-                                    <select #circonscriptionCommune="ngModel"
-                                        [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
-                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
-                                        [required]="true" [(ngModel)]="circonscription.commune" required
-                                        class="form-control" name="departement" id="commune">
-                                        <option disabled selected>Selectionner votre Commune</option>
-                                        <option *ngFor="let commune of communeMbour" [value]="commune">
-                                            {{commune}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </ng-container>
-                            <ng-container *ngIf="circonscription.departement == 'Louga'">
-
-                                <div class="form-group">
-                                    <label for="nom">Commune</label>
-                                    <select #circonscriptionCommune="ngModel"
-                                        [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
-                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
-                                        [required]="true" [(ngModel)]="circonscription.commune" required
-                                        class="form-control" name="departement" id="commune">
-                                        <option disabled selected>Selectionner votre Commune</option>
-                                        <option *ngFor="let commune of communeLouga" [value]="commune">
-                                            {{commune}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </ng-container>
-                            <ng-container *ngIf="circonscription.departement == 'Kébémer'">
-
-                                <div class="form-group">
-                                    <label for="nom">Commune</label>
-                                    <select #circonscriptionCommune="ngModel"
-                                        [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
-                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
-                                        [required]="true" [(ngModel)]="circonscription.commune" required
-                                        class="form-control" name="departement" id="commune">
-                                        <option disabled selected>Selectionner votre Commune</option>
-                                        <option *ngFor="let commune of communeKebemer" [value]="commune">
-                                            {{commune}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </ng-container>
-                            <ng-container *ngIf="circonscription.departement == 'Linguère'">
-
-                                <div class="form-group">
-                                    <label for="nom">Commune</label>
-                                    <select #circonscriptionCommune="ngModel"
-                                        [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
-                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
-                                        [required]="true" [(ngModel)]="circonscription.commune" required
-                                        class="form-control" name="departement" id="commune">
-                                        <option disabled selected>Selectionner votre Commune</option>
-                                        <option *ngFor="let commune of communeLinguere" [value]="commune">
-                                            {{commune}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </ng-container>
-                            <ng-container *ngIf="circonscription.departement == 'Kaolack'">
-
-                                <div class="form-group">
-                                    <label for="nom">Commune</label>
-                                    <select #circonscriptionCommune="ngModel"
-                                        [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
-                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
-                                        [required]="true" [(ngModel)]="circonscription.commune" required
-                                        class="form-control" name="departement" id="commune">
-                                        <option disabled selected>Selectionner votre Commune</option>
-                                        <option *ngFor="let commune of communeKaolack" [value]="commune">
-                                            {{commune}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </ng-container>
-                            <ng-container *ngIf="circonscription.departement == 'Guinguinéo'">
-
-                                <div class="form-group">
-                                    <label for="nom">Commune</label>
-                                    <select #circonscriptionCommune="ngModel"
-                                        [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
-                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
-                                        [required]="true" [(ngModel)]="circonscription.commune" required
-                                        class="form-control" name="departement" id="commune">
-                                        <option disabled selected>Selectionner votre Commune</option>
-                                        <option *ngFor="let commune of communeGuinguineo" [value]="commune">
-                                            {{commune}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </ng-container>
-                            <ng-container *ngIf="circonscription.departement == 'Nioro du Rip'">
-
-                                <div class="form-group">
-                                    <label for="nom">Commune</label>
-                                    <select #circonscriptionCommune="ngModel"
-                                        [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
-                                                                                    invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
-                                        [required]="true" [(ngModel)]="circonscription.commune" required
-                                        class="form-control" name="departement" id="commune">
-                                        <option disabled selected>Selectionner votre Commune</option>
-                                        <option *ngFor="let commune of communeNioroduRip" [value]="commune">
-                                            {{commune}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </ng-container>
-                            <ng-container *ngIf="circonscription.departement == 'Diourbel'">
-
-                                <div class="form-group">
-                                    <label for="nom">Commune</label>
-                                    <select #circonscriptionCommune="ngModel"
-                                        [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
-                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
-                                        [required]="true" [(ngModel)]="circonscription.commune" required
-                                        class="form-control" name="departement" id="commune">
-                                        <option disabled selected>Selectionner votre Commune</option>
-                                        <option *ngFor="let commune of communeDiourbel" [value]="commune">
-                                            {{commune}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </ng-container>
-                            <ng-container *ngIf="circonscription.departement == 'Bambey'">
-
-                                <div class="form-group">
-                                    <label for="nom">Commune</label>
-                                    <select #circonscriptionCommune="ngModel"
-                                        [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
-                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
-                                        [required]="true" [(ngModel)]="circonscription.commune" required
-                                        class="form-control" name="departement" id="commune">
-                                        <option disabled selected>Selectionner votre Commune</option>
-                                        <option *ngFor="let commune of communeBambey" [value]="commune">
-                                            {{commune}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </ng-container>
-                            <ng-container *ngIf="circonscription.departement == 'Mbacké'">
-
-                                <div class="form-group">
-                                    <label for="nom">Commune</label>
-                                    <select #circonscriptionCommune="ngModel"
-                                        [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
-                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
-                                        [required]="true" [(ngModel)]="circonscription.commune" required
-                                        class="form-control" name="departement" id="commune">
-                                        <option disabled selected>Selectionner votre Commune</option>
-                                        <option *ngFor="let commune of communeMbacke" [value]="commune">
-                                            {{commune}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </ng-container>
-                            <ng-container *ngIf="circonscription.departement == 'Fatick'">
-
-                                <div class="form-group">
-                                    <label for="nom">Commune</label>
-                                    <select #circonscriptionCommune="ngModel"
-                                        [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
-                                                                                    invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
-                                        [required]="true" [(ngModel)]="circonscription.commune" required
-                                        class="form-control" name="departement" id="commune">
-                                        <option disabled selected>Selectionner votre Commune</option>
-                                        <option *ngFor="let commune of communeFatick" [value]="commune">
-                                            {{commune}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </ng-container>
-                            <ng-container *ngIf="circonscription.departement == 'Foundiougne'">
-
-                                <div class="form-group">
-                                    <label for="nom">Commune</label>
-                                    <select #circonscriptionCommune="ngModel"
-                                        [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
-                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
-                                        [required]="true" [(ngModel)]="circonscription.commune" required
-                                        class="form-control" name="departement" id="commune">
-                                        <option disabled selected>Selectionner votre Commune</option>
-                                        <option *ngFor="let commune of communeFoundiougne" [value]="commune">
-                                            {{commune}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </ng-container>
-                            <ng-container *ngIf="circonscription.departement == 'Gossas'">
-
-                                <div class="form-group">
-                                    <label for="nom">Commune</label>
-                                    <select #circonscriptionCommune="ngModel"
-                                        [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
-                                                                                    invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
-                                        [required]="true" [(ngModel)]="circonscription.commune" required
-                                        class="form-control" name="departement" id="commune">
-                                        <option disabled selected>Selectionner votre Commune</option>
-                                        <option *ngFor="let commune of communeGossas" [value]="commune">
-                                            {{commune}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </ng-container>
-                            <ng-container *ngIf="circonscription.departement == 'Kaffrine'">
-
-                                <div class="form-group">
-                                    <label for="nom">Commune</label>
-                                    <select #circonscriptionCommune="ngModel"
-                                        [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
-                                                                                    invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
-                                        [required]="true" [(ngModel)]="circonscription.commune" required
-                                        class="form-control" name="departement" id="commune">
-                                        <option disabled selected>Selectionner votre Commune</option>
-                                        <option *ngFor="let commune of communeKaffrine" [value]="commune">
-                                            {{commune}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </ng-container>
-                            <ng-container *ngIf="circonscription.departement == 'Birkilane'">
-
-                                <div class="form-group">
-                                    <label for="nom">Commune</label>
-                                    <select #circonscriptionCommune="ngModel"
-                                        [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
-                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
-                                        [required]="true" [(ngModel)]="circonscription.commune" required
-                                        class="form-control" name="departement" id="commune">
-                                        <option disabled selected>Selectionner votre Commune</option>
-                                        <option *ngFor="let commune of communeBirkilane" [value]="commune">
-                                            {{commune}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </ng-container>
-                            <ng-container *ngIf="circonscription.departement == 'Malème-Hodar'">
-
-                                <div class="form-group">
-                                    <label for="nom">Commune</label>
-                                    <select #circonscriptionCommune="ngModel"
-                                        [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
-                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
-                                        [required]="true" [(ngModel)]="circonscription.commune" required
-                                        class="form-control" name="departement" id="commune">
-                                        <option disabled selected>Selectionner votre Commune</option>
-                                        <option *ngFor="let commune of communeMalemeHodar" [value]="commune">
-                                            {{commune}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </ng-container>
-                            <ng-container *ngIf="circonscription.departement == 'Koungheul'">
-
-                                <div class="form-group">
-                                    <label for="nom">Commune</label>
-                                    <select #circonscriptionCommune="ngModel"
-                                        [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
-                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
-                                        [required]="true" [(ngModel)]="circonscription.commune" required
-                                        class="form-control" name="departement" id="commune">
-                                        <option disabled selected>Selectionner votre Commune</option>
-                                        <option *ngFor="let commune of communeKoungheul" [value]="commune">
-                                            {{commune}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </ng-container>
-                            <ng-container *ngIf="circonscription.departement == 'Saint-Louis'">
-
-                                <div class="form-group">
-                                    <label for="nom">Commune</label>
-                                    <select #circonscriptionCommune="ngModel"
-                                        [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
-                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
-                                        [required]="true" [(ngModel)]="circonscription.commune" required
-                                        class="form-control" name="departement" id="commune">
-                                        <option disabled selected>Selectionner votre Commune</option>
-                                        <option *ngFor="let commune of communeSaintLouis" [value]="commune">
-                                            {{commune}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </ng-container>
-                            <ng-container *ngIf="circonscription.departement == 'Dagana'">
-
-                                <div class="form-group">
-                                    <label for="nom">Commune</label>
-                                    <select #circonscriptionCommune="ngModel"
-                                        [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
-                                                                                    invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
-                                        [required]="true" [(ngModel)]="circonscription.commune" required
-                                        class="form-control" name="departement" id="commune">
-                                        <option disabled selected>Selectionner votre Commune</option>
-                                        <option *ngFor="let commune of communeDagana" [value]="commune">
-                                            {{commune}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </ng-container>
-                            <ng-container *ngIf="circonscription.departement == 'Podor'">
-
-                                <div class="form-group">
-                                    <label for="nom">Commune</label>
-                                    <select #circonscriptionCommune="ngModel"
-                                        [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
-                                                                                    invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
-                                        [required]="true" [(ngModel)]="circonscription.commune" required
-                                        class="form-control" name="departement" id="commune">
-                                        <option disabled selected>Selectionner votre Commune</option>
-                                        <option *ngFor="let commune of communePodor" [value]="commune">
-                                            {{commune}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </ng-container>
-                            <ng-container *ngIf="circonscription.departement == 'Matam'">
-
-                                <div class="form-group">
-                                    <label for="nom">Commune</label>
-                                    <select #circonscriptionCommune="ngModel"
-                                        [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
-                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
-                                        [required]="true" [(ngModel)]="circonscription.commune" required
-                                        class="form-control" name="departement" id="commune">
-                                        <option disabled selected>Selectionner votre Commune</option>
-                                        <option *ngFor="let commune of communeMatam" [value]="commune">
-                                            {{commune}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </ng-container>
-                            <ng-container *ngIf="circonscription.departement == 'Kanel'">
-
-                                <div class="form-group">
-                                    <label for="nom">Commune</label>
-                                    <select #circonscriptionCommune="ngModel"
-                                        [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
-                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
-                                        [required]="true" [(ngModel)]="circonscription.commune" required
-                                        class="form-control" name="departement" id="commune">
-                                        <option disabled selected>Selectionner votre Commune</option>
-                                        <option *ngFor="let commune of communeKanel" [value]="commune">
-                                            {{commune}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </ng-container>
-                            <ng-container *ngIf="circonscription.departement == 'Ranérou'">
-
-                                <div class="form-group">
-                                    <label for="nom">Commune</label>
-                                    <select #circonscriptionCommune="ngModel"
-                                        [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
-                                                                                    invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
-                                        [required]="true" [(ngModel)]="circonscription.commune" required
-                                        class="form-control" name="departement" id="commune">
-                                        <option disabled selected>Selectionner votre Commune</option>
-                                        <option *ngFor="let commune of communeRanerou" [value]="commune">
-                                            {{commune}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </ng-container>
-                            <ng-container *ngIf="circonscription.departement == 'Kédougou'">
-
-                                <div class="form-group">
-                                    <label for="nom">Commune</label>
-                                    <select #circonscriptionCommune="ngModel"
-                                        [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
-                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
-                                        [required]="true" [(ngModel)]="circonscription.commune" required
-                                        class="form-control" name="departement" id="commune">
-                                        <option disabled selected>Selectionner votre Commune</option>
-                                        <option *ngFor="let commune of communeKedougou" [value]="commune">
-                                            {{commune}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </ng-container>
-                            <ng-container *ngIf="circonscription.departement == 'Salémata'">
-
-                                <div class="form-group">
-                                    <label for="nom">Commune</label>
-                                    <select #circonscriptionCommune="ngModel"
-                                        [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
-                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
-                                        [required]="true" [(ngModel)]="circonscription.commune" required
-                                        class="form-control" name="departement" id="commune">
-                                        <option disabled selected>Selectionner votre Commune</option>
-                                        <option *ngFor="let commune of communeSalemata" [value]="commune">
-                                            {{commune}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </ng-container>
-                            <ng-container *ngIf="circonscription.departement == 'Saraya'">
-
-                                <div class="form-group">
-                                    <label for="nom">Commune</label>
-                                    <select #circonscriptionCommune="ngModel"
-                                        [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
-                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
-                                        [required]="true" [(ngModel)]="circonscription.commune" required
-                                        class="form-control" name="departement" id="commune">
-                                        <option disabled selected>Selectionner votre Commune</option>
-                                        <option *ngFor="let commune of communeSaraya" [value]="commune">
-                                            {{commune}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </ng-container>
-                            <ng-container *ngIf="circonscription.departement == 'Tambacounda'">
-
-                                <div class="form-group">
-                                    <label for="nom">Commune</label>
-                                    <select #circonscriptionCommune="ngModel"
-                                        [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
-                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
-                                        [required]="true" [(ngModel)]="circonscription.commune" required
-                                        class="form-control" name="departement" id="commune">
-                                        <option disabled selected>Selectionner votre Commune</option>
-                                        <option *ngFor="let commune of communeTambacounda" [value]="commune">
-                                            {{commune}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </ng-container>
-                            <ng-container *ngIf="circonscription.departement == 'Goudiry'">
-
-                                <div class="form-group">
-                                    <label for="nom">Commune</label>
-                                    <select #circonscriptionCommune="ngModel"
-                                        [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
-                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
-                                        [required]="true" [(ngModel)]="circonscription.commune" required
-                                        class="form-control" name="departement" id="commune">
-                                        <option disabled selected>Selectionner votre Commune</option>
-                                        <option *ngFor="let commune of communeGoudiry" [value]="commune">
-                                            {{commune}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </ng-container>
-                            <ng-container *ngIf="circonscription.departement == 'Bakel'">
-
-                                <div class="form-group">
-                                    <label for="nom">Commune</label>
-                                    <select #circonscriptionCommune="ngModel"
-                                        [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
-                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
-                                        [required]="true" [(ngModel)]="circonscription.commune" required
-                                        class="form-control" name="departement" id="commune">
-                                        <option disabled selected>Selectionner votre Commune</option>
-                                        <option *ngFor="let commune of communeBakel" [value]="commune">
-                                            {{commune}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </ng-container>
-                            <ng-container *ngIf="circonscription.departement == 'Koumpentoum'">
-
-                                <div class="form-group">
-                                    <label for="nom">Commune</label>
-                                    <select #circonscriptionCommune="ngModel"
-                                        [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
-                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
-                                        [required]="true" [(ngModel)]="circonscription.commune" required
-                                        class="form-control" name="departement" id="commune">
-                                        <option disabled selected>Selectionner votre Commune</option>
-                                        <option *ngFor="let commune of communeKoumpentoum" [value]="commune">
-                                            {{commune}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </ng-container>
-                            <ng-container *ngIf="circonscription.departement == 'Kolda'">
-
-                                <div class="form-group">
-                                    <label for="nom">Commune</label>
-                                    <select #circonscriptionCommune="ngModel"
-                                        [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
-                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
-                                        [required]="true" [(ngModel)]="circonscription.commune" required
-                                        class="form-control" name="departement" id="commune">
-                                        <option disabled selected>Selectionner votre Commune</option>
-                                        <option *ngFor="let commune of communeKolda" [value]="commune">
-                                            {{commune}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </ng-container>
-                            <ng-container *ngIf="circonscription.departement == 'Médina Yoro Foulah'">
-
-                                <div class="form-group">
-                                    <label for="nom">Commune</label>
-                                    <select #circonscriptionCommune="ngModel"
-                                        [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
-                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
-                                        [required]="true" [(ngModel)]="circonscription.commune" required
-                                        class="form-control" name="departement" id="commune">
-                                        <option disabled selected>Selectionner votre Commune</option>
-                                        <option *ngFor="let commune of communeMedinaYoroFoulah" [value]="commune">
-                                            {{commune}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </ng-container>
-                            <ng-container *ngIf="circonscription.departement == 'Vélingara'">
-
-                                <div class="form-group">
-                                    <label for="nom">Commune</label>
-                                    <select #circonscriptionCommune="ngModel"
-                                        [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
-                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
-                                        [required]="true" [(ngModel)]="circonscription.commune" required
-                                        class="form-control" name="departement" id="commune">
-                                        <option disabled selected>Selectionner votre Commune</option>
-                                        <option *ngFor="let commune of communeVelingara" [value]="commune">
-                                            {{commune}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </ng-container>
-                            <ng-container *ngIf="circonscription.departement == 'Sédhiou'">
-
-                                <div class="form-group">
-                                    <label for="nom">Commune</label>
-                                    <select #circonscriptionCommune="ngModel"
-                                        [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
-                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
-                                        [required]="true" [(ngModel)]="circonscription.commune" required
-                                        class="form-control" name="departement" id="commune">
-                                        <option disabled selected>Selectionner votre Commune</option>
-                                        <option *ngFor="let commune of communeSedhiou" [value]="commune">
-                                            {{commune}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </ng-container>
-                            <ng-container *ngIf="circonscription.departement == 'Bounkiling'">
-
-                                <div class="form-group">
-                                    <label for="nom">Commune</label>
-                                    <select #circonscriptionCommune="ngModel"
-                                        [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
-                                                                                    invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
-                                        [required]="true" [(ngModel)]="circonscription.commune" required
-                                        class="form-control" name="departement" id="commune">
-                                        <option disabled selected>Selectionner votre Commune</option>
-                                        <option *ngFor="let commune of communeBounkiling" [value]="commune">
-                                            {{commune}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </ng-container>
-                            <ng-container *ngIf="circonscription.departement == 'Goudomp'">
-
-                                <div class="form-group">
-                                    <label for="nom">Commune</label>
-                                    <select #circonscriptionCommune="ngModel"
-                                        [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
-                                                                                    invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
-                                        [required]="true" [(ngModel)]="circonscription.commune" required
-                                        class="form-control" name="departement" id="commune">
-                                        <option disabled selected>Selectionner votre Commune</option>
-                                        <option *ngFor="let commune of communeGoudomp" [value]="commune">
-                                            {{commune}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </ng-container>
-                            <ng-container *ngIf="circonscription.departement == 'Ziguinchor'">
-
-                                <div class="form-group">
-                                    <label for="nom">Commune</label>
-                                    <select #circonscriptionCommune="ngModel"
-                                        [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
-                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
-                                        [required]="true" [(ngModel)]="circonscription.commune" required
-                                        class="form-control" name="departement" id="commune">
-                                        <option disabled selected>Selectionner votre Commune</option>
-                                        <option *ngFor="let commune of communeZiguinchor" [value]="commune">
-                                            {{commune}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </ng-container>
-                            <ng-container *ngIf="circonscription.departement == 'Bignona'">
-
-                                <div class="form-group">
-                                    <label for="nom">Commune</label>
-                                    <select #circonscriptionCommune="ngModel"
-                                        [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
-                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
-                                        [required]="true" [(ngModel)]="circonscription.commune" required
-                                        class="form-control" name="departement" id="commune">
-                                        <option disabled selected>Selectionner votre Commune</option>
-                                        <option *ngFor="let commune of communeBignona" [value]="commune">
-                                            {{commune}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </ng-container>
-                            <ng-container *ngIf="circonscription.departement == 'Oussouye'">
-
-                                <div class="form-group">
-                                    <label for="nom">Commune</label>
-                                    <select #circonscriptionCommune="ngModel"
-                                        [ngClass]="{'is-invalid': circonscriptionCommune.touched && circonscriptionCommune.
-                                                                                                                invalid,'is-valid':circonscriptionCommune.touched && circonscriptionCommune.valid}"
-                                        [required]="true" [(ngModel)]="circonscription.commune" required
-                                        class="form-control" name="departement" id="commune">
-                                        <option disabled selected>Selectionner votre Commune</option>
-                                        <option *ngFor="let commune of communeOussouye" [value]="commune">
-                                            {{commune}}
-                                        </option>
-                                    </select>
-                                </div>
-                            </ng-container>
+                            </div>
 
                         </div>
                     </div>
-                </div>
 
+                </mat-card-content>
+                <mat-card-actions>
+                    <button mat-button color="white">
+                        <mat-spinner *ngIf="tourne" class="spinner" diameter="100"></mat-spinner>S'inscrire
+                    </button>
+                </mat-card-actions>
 
-            </div>
-            <button [disabled]="form.invalid" class="btn btn-primary btn-lg btn-block">Ajouter</button>
+                <mat-card-footer></mat-card-footer>
+            </mat-card>
+        </form>
+    </mat-grid-tile>
+    <mat-grid-tile>
 
-            <div class="card-footer text-muted text-center bg-tertiary">
-            </div>
-        </div>
+        <form #form="ngForm" (ngSubmit)="connecter()" ngNativeValidate class="example-form1" >
+            <mat-card>
+                <mat-card-title class="text-center">
+                    Formulaire de connexion
+                </mat-card-title>
+                <mat-card-content>
+                    <mat-card-subtitle>Connexion</mat-card-subtitle>
+                                        <div class="alert alert-danger" *ngIf="ok2==true"> <strong>Email ou mot de passe non valide ..</strong> </div>
 
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md">
+                                <mat-form-field class="example-full-width" appearance="fill">
+                                    <mat-label> Email</mat-label>
+                                    <input matInput #electeurEmailConnexion="ngModel"
+                                        [ngClass]="{'is-invalid': electeurEmailConnexion.touched && electeurEmailConnexion.
+                                                                                                                                                invalid,'is-valid':electeurEmail.touched && electeurAdresse.valid}"
+                                        [required]="true" [(ngModel)]="user.username" type="email"
+                                        name="electeurEmailConnexion" id="electeurEmail"
+                                        placeholder="Entrer votre  email">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md">
+                                <mat-form-field class="example-full-width" appearance="fill">
+                                    <mat-label>Mot de passe</mat-label>
+                                    <input matInput #electeurPasswordConnexion="ngModel"
+                                        [ngClass]="{'is-invalid': electeurPasswordConnexion.touched && electeurPasswordConnexion.
+                                                                                                invalid,'is-valid':electeurPasswordConnexion.touched && electeurPasswordConnexion.valid}"
+                                        [required]="true" [(ngModel)]="user.password" type="password"
+                                        name="electeurPasswordConnexion" id="electeurPassword"
+                                        placeholder="Entrer votre mot de passe">
+                                </mat-form-field>
+                            </div>
 
-    </form>
-</div>
+                        </div>
+                    </div>
+
+                </mat-card-content>
+                <mat-card-actions>
+                    <button #saveButton mat-button color="white">
+                        <mat-spinner *ngIf="tourne2" class="spinner" diameter="100"></mat-spinner>Se connecter
+                    </button>
+
+                </mat-card-actions>
+
+                <mat-card-footer></mat-card-footer>
+            </mat-card>
+        </form>
+    </mat-grid-tile>
+</mat-grid-list>

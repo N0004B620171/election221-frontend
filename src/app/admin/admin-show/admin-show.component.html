@@ -1,0 +1,13 @@
+<div class="col">
+    <button type="button" class="btn btn-danger">activer candidature</button>
+    <button type="button" class="btn btn-warning">desactiver candidature</button>
+    <button type="button" class="btn btn-info">activer vote</button>
+    <button type="button" class="btn btn-light">desactiver vote</button>
+</div>
+<div class="col-md mt-5"
+         *ngFor="let candidat of candidats">
+            {{candidat.prenom}} {{candidat.nom}} du
+            parti {{candidat.nom_parti}} ont vote pour lui 0{{candidat.electeur?.id}} electeurs
+
+
+</div>

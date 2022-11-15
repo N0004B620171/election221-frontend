@@ -1,1 +1,55 @@
-<p>electeur-vote works!</p>
+<mat-grid-list cols="3" rowHeight="500px">
+    <mat-grid-tile [colspan]="2">
+        <img src="../assets/image/election2.jpg" class="d-block w-100" height="519px" alt="...">
+
+    </mat-grid-tile>
+    <mat-grid-tile>
+
+
+        <form #form="ngForm" (ngSubmit)="voter()" ngNativeValidate class="example-form1">
+            <mat-card>
+                <mat-card-title class="text-center">
+                    Formulaire de vote
+                </mat-card-title>
+                <mat-card-content>
+                    <mat-card-subtitle>Vote</mat-card-subtitle>
+                    <div class="alert alert-danger" *ngIf="aVoter=='Vous avez deja voter'"> <strong>Vous avez deja voter..</strong> </div>
+                   
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md">
+
+                                <mat-form-field class="example-full-width" appearance="fill">
+                                    <mat-label>Choisissez votre candidat</mat-label>
+                                    <mat-select #electeurNomParti="ngModel"
+                                        [ngClass]="{'is-invalid': electeurNomParti.touched && electeurNomParti.
+                                                                            invalid,'is-valid':electeurNomParti.touched && electeurNomParti.valid}"
+                                        [required]="true" [(ngModel)]="candidat" required name="region">
+                                        <mat-option disabled>Selectionner votre candidat</mat-option>
+                                        <mat-option *ngFor="let candidat of candidats"
+                                            [value]="candidat">{{candidat.prenom}} {{candidat.nom}} du parti {{candidat.nom_parti}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+
+
+                </mat-card-content>
+                <mat-card-actions>
+                    <button #saveButton mat-button color="white">
+                        <mat-spinner *ngIf="tourne2" class="spinner" diameter="100"></mat-spinner>Voter
+                    </button>
+
+                </mat-card-actions>
+
+                <mat-card-footer></mat-card-footer>
+            </mat-card>
+        </form>
+
+
+    </mat-grid-tile>
+</mat-grid-list>
