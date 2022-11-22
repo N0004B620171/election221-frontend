@@ -32,6 +32,11 @@ export class ElecteurService {
       // headers: this.userService.autorisation(),
     });
   }
+  findOneByCni(cni: string) {
+    return this.httpClient.get('http://127.0.0.1:8000/electeur/chercherByCni/' + cni, {
+      // headers: this.userService.autorisation(),
+    });
+  }
 
   create(electeur: Electeur) {
     return this.httpClient.post('http://127.0.0.1:8000/electeur/new', electeur, {

@@ -1,0 +1,37 @@
+<form #form="ngForm" (ngSubmit)="VerifDouble()" ngNativeValidate class="example-form">
+    <mat-card>
+     
+        <mat-card-content>
+            <mat-card-subtitle>Verification double inscription</mat-card-subtitle>
+            <div class="alert alert-success" *ngIf="ok1==true"> <strong>Aucune inscription double avec cette cni ..</strong>
+            </div>
+            
+            <div class="alert alert-danger" *ngIf="ok2==true"> <strong>il y'a une inscription double avec cette cni ..</strong>
+            </div>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-md">
+                        <mat-form-field class="" appearance="fill">
+                            <mat-label> Cni</mat-label>
+                            <input matInput #cniInput="ngModel" [ngClass]="{'is-invalid': cniInput.touched && cniInput.                                                                
+                                invalid,'is-valid':cniInput.touched && cniInput.valid}" [required]="true"
+                                [(ngModel)]="cni" type="text" name="cniInput" id="cniInput"
+                                placeholder="Entrer votre  cni">
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+
+
+        </mat-card-content>
+        <mat-card-actions>
+            <button #saveButton mat-button color="white">
+                <mat-spinner *ngIf="tourne2" class="spinner" diameter="100"></mat-spinner>Verification
+            </button>
+
+        </mat-card-actions>
+
+        <mat-card-footer></mat-card-footer>
+    </mat-card>
+</form>

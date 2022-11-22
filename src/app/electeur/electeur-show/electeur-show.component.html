@@ -1,13 +1,19 @@
-<h1>Resultat election </h1>
+<div class="text-center">
+    <h1>Resultat des elections </h1>
+
+</div>
 <div class="row">
-<div id="map" class="mb-3">
+    <div class="container-fluid py-3 row">
+        <h1>Resultat par region</h1>
 
-</div>
+        <div id="map" class="col"></div>
+        <div class="col">
+            <app-piechart></app-piechart>
+        </div>
 
-<div class="col-md mt-5" *ngFor="let candidat of candidats">
-    {{candidat.prenom}} {{candidat.nom}} du
-    parti {{candidat.nom_parti}} ont vote pour lui 0{{candidat.electeur?.id}} electeurs
+    </div>
 
 
-</div>
+
+
 </div>

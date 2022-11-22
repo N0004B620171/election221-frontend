@@ -1,8 +1,9 @@
-
-
-mat-grid-tile {
-  background: lightblue;
+#map {
+  height: 400px;
+  width: 100%;
+  max-width: 600px;
 }
+
 
 
 .example-spacer {

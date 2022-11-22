@@ -29,6 +29,11 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { AdminShowComponent } from './admin/admin-show/admin-show.component';
+import { NgApexchartsModule } from "ng-apexcharts";
+import { PiechartComponent } from './piechart/piechart/piechart.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { VerifdoubleinscriptionComponent } from './popup/verifdoubleinscription/verifdoubleinscription.component';
+import { VerifmoninscriptionComponent } from './popup/verifmoninscription/verifmoninscription.component';
 
 @NgModule({
   declarations: [
@@ -44,13 +49,17 @@ import { AdminShowComponent } from './admin/admin-show/admin-show.component';
     CandidatShowComponent,
     ElecteurVoteComponent,
     AdminShowComponent,
+    PiechartComponent,
+    VerifdoubleinscriptionComponent,
+    VerifmoninscriptionComponent,
 
   ],
   imports: [MatAutocompleteModule, MatProgressSpinnerModule,
     BrowserModule, MatToolbarModule,
+    NgApexchartsModule,
     HttpClientModule, MatGridListModule, MatDividerModule,
     AppRoutingModule,
-    FormsModule, MatIconModule,
+    FormsModule, MatIconModule, MatDialogModule,
     BrowserAnimationsModule
     , MatCardModule, MatFormFieldModule, MatButtonModule,
      MatInputModule, ReactiveFormsModule, MatSelectModule, MatDatepickerModule, MatNativeDateModule
